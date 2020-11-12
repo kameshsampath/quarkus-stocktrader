@@ -32,5 +32,5 @@ __NOTE__: update `quay.io/kameshsampath` to match your repository
 Deploy the application to Kubernetes Cluster by:
 
 ```shell
-kubectl apply -k quay.io/kameshsampath/tradr:latest
+kubectl apply -k k8s/
 ```
