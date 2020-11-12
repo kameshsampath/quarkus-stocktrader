@@ -1,0 +1,44 @@
+// Alert Variables
+@import 'alert-variables';
+
+
+// Alerts
+.alert--information {
+  border-top: 5px solid $status-information;
+
+  .modal-card__icon {
+    fill: $status-information;
+  }
+}
+
+.alert--normal {
+  border-top: 5px solid $status-normal;
+
+  .modal-card__icon {
+    fill: $status-normal;
+  }
+}
+
+.alert--warning {
+  border-top: 5px solid $status-warning;
+
+  .modal-card__icon {
+    fill: $status-warning;
+  }
+}
+
+.alert--escalated {
+  border-top: 5px solid $status-escalated;
+
+  .modal-card__icon {
+    fill: $status-escalated;
+  }
+}
+
+.alert--critical {
+  border-top: 5px solid $status-critical;
+
+  .modal-card__icon {
+    fill: $status-critical;
+  }
+}

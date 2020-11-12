@@ -1,0 +1,38 @@
+// Modal Variables
+@import 'modal-variables';
+
+
+// Toaster Modal
+.toaster-modal {
+  @include translate(110%);
+  @include transition(.25s);
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  z-index: z(absolute);
+
+  .modal-card {
+    @include size(380px, auto);
+    padding: 20px;
+  }
+
+  .modal-card__icon {
+    @include size(18px);
+    margin-right: 13px;
+  }
+
+  .icon--close-modal {
+    @include size(10px);
+  }
+
+  // Modal Visible
+  &.is-visible {
+    @include translate(0);
+  }
+
+  // Modal Close
+  .modal-card__close {
+    @include size(14px);
+    top: 15px;
+  }
+}

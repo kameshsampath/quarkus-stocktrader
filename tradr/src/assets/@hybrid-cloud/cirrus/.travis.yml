@@ -1,0 +1,18 @@
+dist: trusty
+language: node_js
+node_js:
+  - 6
+script: npm run build
+before_install:
+  - rvm use 2.4.1 --default
+  - gem install scss_lint -f
+deploy:
+  provider: npm
+  email: "rodet@de.ibm.com"
+  api_key: $NPM_KEY
+  skip_cleanup: true
+  on:
+    all_branches: true
+    tags: true
+notifications:
+  email: false

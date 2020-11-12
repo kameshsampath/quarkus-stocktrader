@@ -1,0 +1,106 @@
+// Card Variables
+@import 'cards-variables';
+
+
+// Card
+.card {
+  @include transition();
+  position: relative;
+  box-shadow: 0 1px 3px 0 $card-transparent-black;
+
+  &:hover {
+    box-shadow: 0 4px 8px 0 $card-transparent-black;
+  }
+}
+
+
+// Card Body
+.card__body {
+  background-color: $card-body-background-color;
+  padding: 30px;
+  min-height: 100px;
+}
+
+.card__symbol {
+  @include size(56px);
+  display: flex;
+  background-color: $card-symbol-background-color;
+  margin: 0 auto;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon--card-symbol {
+  @include size(32px);
+  fill: $card-symbol-icon-color;
+}
+
+.card__heading {
+  margin: 15px 0 5px;
+  text-align: center;
+}
+
+.card__link {
+  display: block;
+  font-size: 12px;
+  text-align: center;
+}
+
+
+// Card Footer
+.card__footer {
+  background-color: $card-footer-background-color;
+  padding: 12px;
+  border-top: 1px solid $card-footer-border-color;
+}
+
+.card__status {
+  display: none;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+
+  &:before {
+    @include size(16px);
+    border-radius: 50%;
+    margin-right: 5px;
+    content: '';
+  }
+
+  &.is-active {
+    display: flex;
+  }
+}
+
+
+// Card Status
+.card__status--running:before {
+  background-color: $status-normal;
+}
+
+.card__status--warning:before {
+  background-color: $status-warning;
+}
+
+.card__status--not-running:before {
+  background-color: $status-critical;
+}
+
+.card__status--stopped:before {
+  background-color: $status-unknown;
+}
+
+
+// Card Overflow Menu
+.card__overflow {
+  top: 12px;
+  right: 5px;
+}
+
+
+// Focus State
+[data-peripheral='keyboard'] .card .overflow__button:focus {
+  box-shadow: 0 0 0 3px $card-body-background-color,
+              0 0 2px 5px $blue-40;
+}

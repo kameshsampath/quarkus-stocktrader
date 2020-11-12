@@ -1,0 +1,56 @@
+// Search Variables
+@import 'search-variables';
+
+
+// Search
+.input--search::-webkit-search-cancel-button {
+  margin-right: 32px;
+}
+
+
+// Search Icon
+.form-item .icon--search,
+.form-item .icon--filter {
+  top: 12px;
+  fill: $search-icon-color;
+  cursor: pointer;
+
+  &:hover {
+    fill: $search-icon-color-hover;
+  }
+}
+
+
+// Search Filter
+.form-item.with-filter {
+
+  .dropdown {
+    width: 150px;
+  }
+
+  .input {
+    width: calc(100% - 150px);
+
+    &.input--secondary {
+      width: calc(100% - 170px);
+      margin-left: 20px;
+    }
+  }
+
+  .dropdown__label,
+  .dropdown__select {
+    color: $search-filter-color;
+    font-weight: 700;
+    box-shadow: none;
+    background-color: $search-filter-background-color;
+
+    &:before,
+    &:after {
+      background-color: $search-filter-color;
+    }
+  }
+
+  .icon--chevron-down {
+    fill: $search-filter-color;
+  }
+}

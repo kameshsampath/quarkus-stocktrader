@@ -1,0 +1,188 @@
+// Tooltips Variables
+@import 'tooltips-variables';
+
+
+// Tooltip
+.tooltip {
+  position: relative;
+  color: $tooltip-trigger-color;
+  font-weight: 700;
+  cursor: default;
+
+  &:before,
+  &:after {
+    @include transition();
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    transition: all .2s ease-in-out .15s;
+  }
+
+  &:before {
+    @include size(10px);
+    z-index: 1;
+    border: 1px solid lighten($cool-gray-20, 5%);
+    background-color: $tooltip-background-color;
+    content: '';
+  }
+
+  &:after {
+    width: $tooltip-width;
+    color: $tooltip-color;
+    border: 1px solid $cool-white-4;
+    box-shadow: 0 1px 3px 0 color('black', 100, $alpha: .2);
+    background-color: $tooltip-background-color;
+    padding: 5px 7px;
+    content: attr(aria-label);
+    font: {
+      size: 12px;
+      weight: 400;
+    }
+    text-align: center;
+    border-radius: 2px;
+  }
+
+  &:hover {
+
+    &:before,
+    &:after {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+
+
+// Tooltip Top
+.tooltip--top {
+
+  &:before,
+  &:after {
+    left: 50%;
+  }
+
+  &:before {
+    bottom: 25px;
+    transform: translate(-50%, 6px) rotate(45deg);
+    border-top: 0;
+    border-left: 0;
+  }
+
+  &:after {
+    @include translate(-50%, 6px);
+    bottom: 30px;
+  }
+
+  &:hover {
+
+    &:before {
+      transform: translate(-50%, 0) rotate(45deg);
+    }
+
+    &:after {
+      @include translate(-50%, 0);
+    }
+  }
+}
+
+
+// Tooltip Right
+.tooltip--right {
+
+  &:before,
+  &:after {
+    top: 50%;
+  }
+
+  &:before {
+    right: -14px;
+    transform: translate(-6px, -50%) rotate(45deg);
+    border-top: 0;
+    border-right: 0;
+    border-color: lighten($cool-gray-20, 8%);
+  }
+
+  &:after {
+    @include translate(-6px, -50%);
+    right: -($tooltip-width + 10);
+  }
+
+  &:hover {
+
+    &:before {
+      transform: translate(0, -50%) rotate(45deg);
+    }
+
+    &:after {
+      @include translate(0, -50%);
+    }
+  }
+}
+
+
+// Tooltip Bottom
+.tooltip--bottom {
+
+  &:before,
+  &:after {
+    left: 50%;
+  }
+
+  &:before {
+    top: 25px;
+    transform: translate(-50%, -6px) rotate(45deg);
+    border-right: 0;
+    border-bottom: 0;
+    border-color: lighten($cool-gray-20, 11%);
+  }
+
+  &:after {
+    @include translate(-50%, -6px);
+    top: 30px;
+  }
+
+  &:hover {
+
+    &:before {
+      transform: translate(-50%, 0) rotate(45deg);
+    }
+
+    &:after {
+      @include translate(-50%, 0);
+    }
+  }
+}
+
+
+// Tooltip Left
+.tooltip--left {
+
+  &:before,
+  &:after {
+    top: 50%;
+  }
+
+  &:before {
+    left: -14px;
+    transform: translate(6px, -50%) rotate(45deg);
+    border-bottom: 0;
+    border-left: 0;
+    border-color: lighten($cool-gray-20, 8%);
+  }
+
+  &:after {
+    @include translate(6px, -50%);
+    left: -($tooltip-width + 10);
+  }
+
+  &:hover {
+
+    &:before {
+      transform: translate(0, -50%) rotate(45deg);
+    }
+
+    &:after {
+      @include translate(0, -50%);
+    }
+  }
+}

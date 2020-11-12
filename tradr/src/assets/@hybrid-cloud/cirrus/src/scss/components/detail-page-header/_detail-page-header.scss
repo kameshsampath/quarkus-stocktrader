@@ -1,0 +1,92 @@
+// Detail Page Header Variables
+@import 'detail-page-header-variables';
+
+
+// Detail Page Header
+.detail-page-header {
+  display: flex;
+  position: relative;
+  background-color: $detail-page-header-background-color;
+  padding: 24px 30px;
+  flex-wrap: wrap;
+}
+
+.detail-page-header__heading {
+  font-weight: 300;
+}
+
+.detail-page-header__link {
+  color: $detail-page-header-breadcrumb-color;
+
+  .icon {
+    @include size(28px);
+    @include transition();
+    fill: $detail-page-header-icon-color;
+  }
+
+  &:hover {
+    color: $detail-page-header-breadcrumb-color-hover;
+
+    .icon {
+      fill: $detail-page-header-icon-color-hover;
+    }
+  }
+}
+
+.detail-page-header__link-text {
+  position: absolute;
+  left: -9999px;
+}
+
+.detail-page-header__app-link {
+  display: block;
+  color: $detail-page-header-app-link-color;
+  font: {
+    size: 14px;
+    weight: 400;
+  }
+  margin-bottom: 20px;
+
+  &:hover {
+    color: $detail-page-header-app-link-color-hover;
+  }
+}
+
+
+// Detail Page Header Minimal
+.detail-page-header--minimal {
+
+  .detail-page-header__link {
+    @include size(28px);
+  }
+
+  .detail-page-header__heading {
+    display: inline-block;
+    margin: 0 0 0 12px;
+    border-left: 1px solid $navy-gray-50;
+    padding-left: 16px;
+  }
+}
+
+
+// Detail Page Header Expanded
+.detail-page-header--expanded {
+  padding: 24px 30px 0;
+
+  .detail-page-header__link {
+    @include size(auto, 28px);
+  }
+
+  .detail-page-header__breadcrumb {
+    font-size: 14px;
+    line-height: 28px;
+    vertical-align: top;
+    margin-left: 2px;
+  }
+
+  .detail-page-header__heading {
+    display: block;
+    width: 100%;
+    margin: 10px 0 4px;
+  }
+}

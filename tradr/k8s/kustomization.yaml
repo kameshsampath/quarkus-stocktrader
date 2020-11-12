@@ -1,0 +1,10 @@
+---
+namespace: daytrader-dev
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+resources:
+ - tradr-deployment.yaml
+ - tradr-service.yaml
+ - tradr-route.yaml

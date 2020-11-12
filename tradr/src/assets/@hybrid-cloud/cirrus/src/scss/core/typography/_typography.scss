@@ -1,0 +1,93 @@
+// Typography Variables
+@import 'typography-variables';
+
+
+// Headlines
+@mixin headline($size, $weight) {
+  font: {
+    size: $size;
+    weight: $weight;
+  }
+}
+
+%headline-base {
+  display: block;
+  color: $headline-color;
+  line-height: $headline-line-height;
+  margin-bottom: $headline-margin;
+}
+
+.h1 {
+  @extend %headline-base;
+  @include headline($h1-size, 700);
+}
+
+.h2 {
+  @extend %headline-base;
+  @include headline($h2-size, 700);
+}
+
+.h3 {
+  @extend %headline-base;
+  @include headline($h3-size, 700);
+}
+
+.h4 {
+  @extend %headline-base;
+  @include headline($h4-size, 700);
+}
+
+.h5 {
+  @extend %headline-base;
+  @include headline($h5-size, 700);
+}
+
+.h6 {
+  @extend %headline-base;
+  @include headline($h6-size, 700);
+}
+
+
+// Standard Links
+a {
+  @include transition();
+  color: $base-link-color;
+  font-weight: $base-link-font-weight;
+  text-decoration: none;
+}
+
+.text-link {
+
+  &:hover {
+    color: $base-link-color-hover;
+  }
+}
+
+[data-peripheral='keyboard'] .text-link:focus {
+  box-shadow: 0 0 0 1px $base-background,
+              0 0 3px 3px $blue-30;
+}
+
+// Paragraphs
+p {
+  margin-bottom: $paragraph-margin;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+
+// Specialty Characters
+sub,
+sup {
+  font-size: 73%;
+}
+
+sub {
+  vertical-align: bottom;
+}
+
+sup {
+  vertical-align: top;
+}

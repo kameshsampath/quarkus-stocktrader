@@ -1,0 +1,79 @@
+// Pagination Variables
+@import 'pagination-variables';
+
+
+// Pagination
+.pagination {
+  display: inline-block;
+}
+
+
+// Pagination Step
+.pagination__step {
+  display: inline-block;
+  position: relative;
+  margin-right: 80px;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+}
+
+.step__number {
+  @include size(30px);
+  display: block;
+  color: $step-number-color;
+  font-size: 18px;
+  font-weight: 400;
+  border: 1px solid $step-border-color;
+  text-align: center;
+  border-radius: 50%;
+}
+
+
+// Step Lines
+.pagination__step:not(:last-of-type) {
+
+  .step__number:after {
+    @include size(78px, 1px); // Adds 1px spacer between divider line and button
+    position: absolute;
+    top: 14px;
+    left: 31px;
+    background-color: $step-border-color;
+    content: '';
+  }
+}
+
+
+// Current Step
+.pagination__step.is-current {
+
+  .step__number {
+    color: $step-current-number-color;
+    background-color: $step-current-background-color;
+    border-color: $step-current-border-color;
+  }
+}
+
+
+// Pagination Labels
+.step__label {
+  @include size(90px, auto);
+  position: absolute;
+  top: 36px;
+  left: -30px;
+  color: $step-label-color;
+  font-size: 14px;
+  text-align: center;
+}
+
+.pagination.with-labels {
+
+  .pagination__step {
+    margin: 0 60px 0 20px;
+
+    &:last-of-type {
+      margin-right: 20px;
+    }
+  }
+}

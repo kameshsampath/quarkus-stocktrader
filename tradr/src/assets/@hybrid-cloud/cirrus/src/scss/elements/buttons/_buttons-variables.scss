@@ -1,0 +1,37 @@
+// Button Variables
+$button-font-size: 14px !default;
+$button-font-weight: 700 !default;
+$button-height: 40px !default;
+$button-padding: 16px !default;
+
+
+// Primary Button
+$button-primary-color: $shade-0 !default;
+$button-primary-background: $violet-70 !default;
+$button-primary-color-hover: $violet-50 !default;
+$button-primary-icon-fill: $shade-0 !default;
+$button-primary-color-disabled: $navy-gray-20 !default;
+$button-primary-background-disabled: $cool-gray-50 !default;
+$button-primary-icon-fill-disabled: $navy-gray-20 !default;
+
+
+// Secondary Button
+$button-secondary-color: $violet-70 !default;
+$button-secondary-color-hover: $shade-0 !default;
+$button-secondary-border-hover: $violet-50 !default;
+$button-secondary-background-hover: $violet-50 !default;
+$button-secondary-icon-fill: $violet-70 !default;
+$button-secondary-icon-fill-hover: $shade-0 !default;
+$button-secondary-color-disabled: $cool-gray-50 !default;
+$button-secondary-border-disabled: $cool-gray-50 !default;
+$button-secondary-icon-fill-disabled: $cool-gray-50 !default;
+
+
+// Flat Button
+$button-flat-color: $blue-ci !default;
+$button-flat-color-hover: $blue-60 !default;
+$button-flat-color-disabled: $cool-gray-50 !default;
+
+
+// Button Icons
+$button-icon-size: 18px !default;

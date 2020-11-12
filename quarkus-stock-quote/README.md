@@ -1,7 +1,7 @@
 # Quarkus Portfolio
 
 ```shell script
-oc new-project new-stocktrader
+oc new-project daytrader-dev
 ```
 
 ## Create the API Key Secret
@@ -18,6 +18,5 @@ oc create secret generic quarkus-portfolio --from-literal=IEX_API_KEY=$IEX_API_K
 ## Create Routes
 
 ```shell script
-export SVC=$(oc get svc)
-oc create route edge --service=$SVC --port=8080 stock-quote
+oc create route edge --service=quarkus-stock-quote --port=8080 stock-quote
 ```

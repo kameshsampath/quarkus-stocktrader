@@ -1,0 +1,64 @@
+// Base
+body {
+  color: $base-color;
+  line-height: $base-line-height;
+  background-color: $base-background;
+  font: {
+    family: $base-font;
+    size: $base-font-size;
+    weight: $base-font-weight;
+  }
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+
+  @if $base-letter-spacing {
+    letter-spacing: $base-letter-spacing;
+  }
+}
+
+hr {
+  border-style: solid;
+}
+
+input,
+select {
+  vertical-align: middle;
+}
+
+[type='button'],
+[type='submit'],
+button {
+  display: inline-block;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  appearance: none;
+  vertical-align: top;
+}
+
+button {
+  background: none;
+}
+
+
+// User Select
+::selection {
+  color: $user-select-color;
+  background: $user-select-bg;
+}
+
+
+img {
+  max-width: 100%;
+}
+
+// Fix for redundant border when element is focused in Firefox
+::-moz-focus-inner {
+  border: 0;
+}
+
+:focus {
+  outline: 0;
+}

@@ -1,0 +1,128 @@
+// toggle Variables
+@import 'toggle-variables';
+
+
+// Toggle
+.toggle {
+  display: inline-block;
+  position: relative;
+  height: $toggle-height;
+  margin: 5px 0;
+}
+
+.toggle__checkbox {
+  position: absolute;
+  left: -9999px;
+}
+
+.toggle__label {
+  display: block;
+  position: relative;
+  height: 100%;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.toggle__handle {
+  @include size(44px, 20px);
+  display: inline-block;
+  position: relative;
+  margin: 0 5px;
+
+  &:before,
+  &:after {
+    position: absolute;
+    content: '';
+  }
+
+  &:before {
+    @include size(44px, 2px);
+    top: 9px;
+    left: 0;
+    background-color: $toggle-track;
+  }
+
+  &:after {
+    @include size($toggle-height);
+    @include transition();
+    top: 0;
+    left: $toggle-switch-start;
+    border: 2px solid $toggle-switch-border;
+    box-shadow: 0 0 0 3px $base-background;
+    background-color: $toggle-switch-fill;
+    border-radius: 50%;
+  }
+
+  &:hover {
+
+    &:after {
+      @include scale(1.2);
+    }
+  }
+}
+
+
+// Toggle Focus
+[data-peripheral='keyboard'] .toggle__checkbox:focus + .toggle__label {
+  box-shadow: 0 0 0 9px $base-background,
+              0 0 2px 11px $blue-30;
+  border-radius: 0;
+}
+
+
+// Toggle Checked
+.toggle__checkbox:checked + .toggle__label {
+
+  .toggle__handle:after {
+    left: $toggle-switch-stop;
+    background-color: $toggle-color-active;
+    border-color: $toggle-color-active;
+  }
+}
+
+.toggle__label--left,
+.toggle__label--right {
+  display: inline-block;
+  position: relative;
+  top: -5px;
+  color: $base-color;
+  font-size: 14px;
+  line-height: $toggle-height;
+}
+
+.toggle__label--left {
+  left: 0;
+}
+
+.toggle__label--right {
+  right: 0;
+}
+
+
+// Toggle Disabled
+.toggle.is-disabled {
+
+  .toggle__label {
+    cursor: not-allowed;
+  }
+
+  .toggle__handle {
+    &:before,
+    &:after {
+      background-color: $toggle-track-disabled;
+    }
+
+    &:after {
+      left: $toggle-switch-start;
+      box-shadow: 0 0 0 3px $base-background,
+                  inset 0 0 0 3px $toggle-switch-fill-disabled;
+      transform: scale(1);
+      border-color: $toggle-switch-border-disabled;
+    }
+  }
+
+  .toggle__label--left,
+  .toggle__label--right {
+    color: $toggle-label-color-disabled;
+  }
+}

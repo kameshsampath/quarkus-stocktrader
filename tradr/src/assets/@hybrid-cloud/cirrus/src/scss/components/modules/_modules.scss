@@ -1,0 +1,36 @@
+// Modules Variables
+@import 'modules-variables';
+
+
+// Module
+.module {
+  background-color: $module-background-color;
+}
+
+.module__header,
+.module__body,
+.module__footer {
+  padding: 16px;
+}
+
+
+// Module Header
+.module__header {
+  border-bottom: 1px solid $module-border-color;
+}
+
+.module__heading {
+  margin: 0;
+}
+
+
+// Module Body
+.module__body {
+  padding: 24px 16px;
+}
+
+
+// Module Footer
+.module__footer {
+  border-top: 1px solid $module-border-color;
+}

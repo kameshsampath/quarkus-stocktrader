@@ -1,0 +1,33 @@
+// Tag Variables
+@import 'tags-variables';
+
+
+// Tags
+$tags: (
+  ibm: $data-viz-1,
+  beta: $data-viz-2,
+  third-party: $data-viz-3,
+  local: $data-viz-4,
+  dedicated: $data-viz-5,
+  custom: $data-viz-6,
+  experimental: $data-viz-7,
+  community: $data-viz-8,
+  private: $data-viz-1
+);
+
+.tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 20px;
+  border: 1px solid $navy-gray-20;
+  background-color: $tag-background-color;
+  padding: 0 12px;
+  border-radius: 10px;
+}
+
+@each $tag, $color in $tags {
+  .tag--#{$tag} {
+    color: $color;
+  }
+}

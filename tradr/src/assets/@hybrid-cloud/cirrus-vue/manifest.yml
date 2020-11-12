@@ -1,0 +1,10 @@
+applications:
+- name: cirrus-vue
+  host: cirrus-vue
+  memory: 128M
+  path: dist
+  buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git
+  domain: stage1.mybluemix.net
+  timeout: 60
+  root: dist
+  instances: 1

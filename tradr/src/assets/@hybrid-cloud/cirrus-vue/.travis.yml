@@ -1,0 +1,25 @@
+# Configuration for Travis.innovate.ibm.com
+
+language: node_js
+node_js:
+  - '7.4'
+
+env:
+  global:
+    - CF_APP=cirrus-vue
+    - CF_API=https://api.stage1.ng.bluemix.net/
+  
+install:
+  - echo '//npm-registry.whitewater.ibm.com/:_authToken=${NPM_TOKEN}' >> .npmrc
+  - npm install
+  - npm run build
+
+before_deploy:
+  - npm install -g cf-blue-green
+
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: cf-blue-green-travis
+    on:
+      branch: develop

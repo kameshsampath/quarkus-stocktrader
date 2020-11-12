@@ -1,0 +1,161 @@
+// Grid Variables
+@import 'grid-variables';
+
+
+// Base
+* {
+  &,
+  &:before,
+  &:after {
+    box-sizing: border-box;
+  }
+}
+
+
+// Container
+.container {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 3%;
+
+  @include media(tablet) {
+    padding: 0 5%;
+  }
+}
+
+
+// Row
+.#{$grid-row-name} {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+// Box
+.#{$grid-column-name} {
+  padding: 0 ($grid-gutter-width / 2);
+
+  @include media(phone) {
+    flex: 0 0 100%;
+
+    &.#{$grid-column-name}--half {
+      flex: 0 0 50%;
+    }
+  }
+
+  @include media(small-tablet) {
+    flex: 0 0 50%;
+
+    &.#{$grid-column-name}--12,
+    &.#{$grid-column-name}--full {
+      flex: 0 0 100%;
+    }
+  }
+
+  @include media(tablet) {
+    flex: 1;
+    padding: 0 $grid-gutter-width;
+
+    &.#{$grid-column-name}--1,
+    &.#{$grid-column-name}--2,
+    &.#{$grid-column-name}--4,
+    &.#{$grid-column-name}--8,
+    &.#{$grid-column-name}--6th,
+    &.#{$grid-column-name}--half {
+      flex: 0 0 50%;
+    }
+
+    &.#{$grid-column-name}--8th,
+    &.#{$grid-column-name}--4th {
+      flex: 0 0 25%;
+    }
+
+    &.#{$grid-column-name}--7 {
+      flex: 0 0 100%;
+    }
+  }
+
+  @include media(desktop) {
+
+    @for $i from 1 through $grid-column-count {
+      &.#{$grid-column-name}--#{$i} {
+        flex: 0 0 (100% / $grid-column-count * $i);
+      }
+    }
+
+    &.#{$grid-column-name}--8th {
+      flex: 0 0 (100% / 8);
+    }
+
+    &.#{$grid-column-name}--6th {
+      flex: 0 0 (100% / 6);
+    }
+
+    &.#{$grid-column-name}--4th {
+      flex: 0 0 25%;
+    }
+
+    &.#{$grid-column-name}--3rd {
+      flex: 0 0 (100% / 3);
+    }
+
+    &.#{$grid-column-name}--half {
+      flex: 0 0 50%;
+    }
+
+    &.#{$grid-column-name}--2-3rd {
+      flex: 0 0 (100% / 3 * 2);
+    }
+
+    &.#{$grid-column-name}--3-4th {
+      flex: 0 0 75%;
+    }
+
+    &.#{$grid-column-name}--full {
+      flex: 0 0 100%;
+    }
+  }
+}
+
+
+// Box Helpers
+.box--reverse {
+  flex-direction: row-reverse;
+}
+
+.box--center {
+  justify-content: center;
+}
+
+.box--vertical-center {
+  align-items: center;
+}
+
+.box--stretch {
+  align-items: stretch;
+}
+
+.box--no-gutters {
+
+  .#{$grid-column-name} {
+    padding: 0;
+  }
+}
+
+
+// Box Offset
+@include media(tablet) {
+  @for $i from 1 through $grid-column-count - 1 {
+    &.offset--#{$i} {
+      margin-left: 100% / $grid-column-count * $i;
+    }
+  }
+}
+
+
+// Nested Row
+.#{$grid-column-name} .#{$grid-row-name} {
+  margin-left: -10px;
+  margin-right: -10px;
+}

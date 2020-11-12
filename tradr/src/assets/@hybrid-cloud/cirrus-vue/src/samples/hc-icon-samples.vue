@@ -1,0 +1,49 @@
+<template>
+  <div>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="display: none;">
+      <defs>
+        <symbol viewBox="0 0 150 150" id="foo">
+          <g>
+            <ellipse cx="75" cy="75" rx="75" ry="75"></ellipse>
+            <g fill="currentColor" transform="translate(11,9)">
+              <g id="eyes">
+                <path id="left-eye" d="M54 28a8 8 0 0 0 0 16a8 8 0 0 0 0 -16m0 4a4 4 0 0 1 0 8a4 4 0 0 1 0 -8" />
+                <path id="right-eye" d="M74 28a8 8 0 0 0 0 16a8 8 0 0 0 0 -16m0 4a4 4 0 0 1 0 8a4 4 0 0 1 0 -8" />
+              </g>
+              <g id="wings">
+                <path id="left-wing" d="M44 48l-30.829 12.099a14.45 14.45 0 1 0 18.73 18.73M36.927 55.073l-8.75 22.295a10.45 10.45 1 1 1 -13.545 -13.545" />
+                <path id="right-wing" d="M84 48l30.829 12.099a14.45 14.45 0 1 1 -18.73 18.73M91.073 55.073l8.75 22.295a10.45 10.45 0 1 0 13.545 -13.545" />
+              </g>
+              <g id="body">
+                <path id="body-segment-1" d="M47.3 56c0,0 6.2,-8 16.7,-8c10.5,0 16.7,8 16.7,8z" />
+                <rect id="body-segment-2" x="44" y="64" width="40" height="8" />
+                <rect id="body-segment-3" x="44" y="80" width="40" height="8" />
+                <path id="body-segment-4" d="M47.3,96c0,0 6.2,8 16.7,8c10.5,0 16.7,-8 16.7,-8z" />
+              </g>
+            </g>
+          </g>
+        </symbol>
+      </defs>
+    </svg>
+
+    <div class="row u-push-top--large">
+      <h2 class="h2 box box--full">Icon</h2>
+      <div class="box box--full">
+        <hc-icon :href="require('./assets/test.svg') + '#test'"></hc-icon>
+        <hc-icon href="#foo"></hc-icon>
+        <hc-icon href="hc(warn)"></hc-icon>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+  import hcIcon from '../components/hc-icon/hc-icon';
+
+  export default {
+    name: 'hc-icon-samples',
+    components: {
+      'hc-icon': hcIcon,
+    },
+  };
+</script>

@@ -1,0 +1,92 @@
+// Cassie Color Variables
+
+
+// Add Bluemix colors to IBM colors.
+
+// scss-lint:disable NameFormat
+$__bluemix-color-palettes: (
+  'navy-gray': (
+    core: #0f212e,
+    10: #eff2f5,
+    20: #dfe6eb,
+    30: #8c9ba5,
+    40: #5a6872,
+    50: #42535c,
+    60: #394b54,
+    70: #2d3f49,
+    80: #20343e,
+    90: #152934,
+    100: #0f212e
+  )
+);
+
+$__ibm-color-palettes: map-merge($__ibm-color-palettes, $__bluemix-color-palettes);
+// scss-lint:enable NameFormat
+
+
+// Base
+$shade-0: color('white');
+
+$blue-10: color('blue', 10);
+$blue-20: color('blue', 20);
+$blue-30: color('blue', 30);
+$blue-40: color('blue', 40);
+$blue-50: color('blue', 50);
+$blue-60: color('blue', 60);
+$blue-80: color('blue', 80);
+$blue-90: color('blue', 90);
+$blue-ci: #256dd3;
+
+$cerulean-80: color('cerulean', 80);
+
+$cool-gray-10: color('cool-gray', 10);
+$cool-gray-20: color('cool-gray', 20);
+$cool-gray-30: color('cool-gray', 30);
+$cool-gray-50: color('cool-gray', 50);
+$cool-gray-60: color('cool-gray', 60);
+
+$cool-white-4: color('cool-white', 4);
+
+$navy-gray-10: color('navy-gray', 10);
+$navy-gray-20: color('navy-gray', 20);
+$navy-gray-30: color('navy-gray', 30);
+$navy-gray-40: color('navy-gray', 40);
+$navy-gray-50: color('navy-gray', 50);
+$navy-gray-60: color('navy-gray', 60);
+$navy-gray-70: color('navy-gray', 70);
+$navy-gray-80: color('navy-gray', 80);
+$navy-gray-90: color('navy-gray', 90);
+$navy-gray-100: color('navy-gray', 100);
+
+$purple-50: color('purple', 50);
+$purple-60: color('purple', 60);
+
+$red-50: color('red', 50);
+
+$violet-50: color('violet', 50);
+$violet-70: color('violet', 70);
+
+// Basics
+$primary: $violet-70;
+$primary-hover: $violet-50;
+$secondary: $blue-ci;
+$secondary-hover: $blue-60;
+$disabled: $cool-gray-50;
+
+// Status Alerts
+$status-information: color('violet', 70);
+$status-normal: color('lime', 20);
+$status-warning: color('yellow', 10);
+$status-escalated: color('orange', 30);
+$status-critical: color('red', 50);
+$status-unknown: color('cool-gray', 50);
+
+// Data Viz
+$data-viz-1: color('teal', 20);
+$data-viz-2: color('teal', 50);
+$data-viz-3: color('lime', 20);
+$data-viz-4: color('green', 30);
+$data-viz-5: color('green', 50);
+$data-viz-6: color('cerulean', 30);
+$data-viz-7: color('cerulean', 50);
+$data-viz-8: color('cerulean', 70);

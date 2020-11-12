@@ -1,0 +1,106 @@
+// Overflow Variables
+@import 'overflow-variables';
+
+
+// Overflow
+.overflow {
+  @include size(22px);
+  position: absolute;
+
+  .icon--overflow {
+    @include size(22px);
+    @include transition();
+    fill: $overflow-button-color;
+
+    &:hover {
+      fill: $overflow-button-color-hover;
+    }
+  }
+}
+
+.overflow__button:focus {
+  outline: none;
+}
+
+[data-peripheral='keyboard'] .overflow__button:focus,
+  .list-overflow__action:focus {
+  box-shadow: 0 0 0 1px $base-background,
+              0 0 3px 3px $blue-30;
+}
+
+.list-overflow {
+  @include size(180px, auto);
+  @include translate(Y, -20px);
+  @include transition(.3s);
+  position: absolute;
+  top: 38px;
+  right: 0;
+  z-index: z(top);
+  border: 1px solid $cool-white-4;
+  box-shadow: 0 1px 3px 0 color('black', 100, $alpha: .2);
+  background-color: $overflow-list-background-color;
+  padding: 5px 0;
+  opacity: 0;
+  visibility: hidden;
+
+  @include media(small-tablet) {
+    right: -20px;
+  }
+
+  &:before {
+    @include size(10px);
+    @include rotate(45deg);
+    position: absolute;
+    top: -6px;
+    right: 5px;
+    z-index: z(hide);
+    background-color: $overflow-list-background-color;
+    content: '';
+    border-left: 1px solid $cool-white-4;
+    border-top: 1px solid $cool-white-4;
+
+    @include media(small-tablet) {
+      right: 24px;
+    }
+  }
+}
+
+.list-overflow__item {
+
+  &.with-divider {
+    border-top: 1px solid $overflow-list-divider-color;
+    margin-top: 5px;
+    padding-top: 5px;
+  }
+}
+
+.list-overflow__action {
+  @include transition();
+  width: 100%;
+  color: $overflow-list-action-color;
+  font-size: 13px;
+  line-height: 30px;
+  padding: 0 12px;
+  text-align: left;
+
+  &:hover {
+    color: $overflow-list-action-color-hover;
+    background-color: $overflow-list-action-background-hover;
+  }
+
+  &.is-delete {
+
+    &:hover {
+      color: $shade-0;
+      background-color: $status-critical;
+    }
+  }
+}
+
+
+// Overflow List Open
+.overflow__button.is-open + .list-overflow {
+  @include translate(Y, 0);
+  opacity: 1;
+  visibility: visible;
+}

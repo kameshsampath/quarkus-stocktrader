@@ -1,0 +1,183 @@
+// Tabs Variables
+@import 'tabs-variables';
+
+
+// Tabs
+.tabs {
+  position: relative;
+  width: 100%;
+
+  &.is-open {
+
+    .tabs__dropdown {
+
+      &:before {
+        @include rotate(-45deg);
+      }
+
+      &:after {
+        @include rotate(45deg);
+      }
+    }
+
+    .tabs__list {
+      @include translate(Y, $tab-dropdown-height);
+      width: 100%;
+      opacity: 1;
+      visibility: visible;
+
+      @include media(tablet) {
+        @include translate(Y, 0);
+      }
+    }
+  }
+}
+
+
+// Tabs Dropdown (for mobile only)
+.tabs__dropdown {
+  @include size(100%, $tab-dropdown-height);
+  @include transition();
+  display: block;
+  position: relative;
+  z-index: 2;
+  color: $tab-dropdown-color;
+  font-size: $tab-dropdown-font-size;
+  line-height: $tab-dropdown-height;
+  box-shadow: inset 0 -1px 0 $tab-dropdown-border-color;
+  background-color: $tab-dropdown-background-color;
+  padding: 0 16px;
+  cursor: pointer;
+  outline: none;
+
+  @include media(tablet) {
+    display: none; // Hide on >= tablet
+  }
+
+  &:before,
+  &:after {
+    position: absolute;
+    top: 50%;
+    width: 8px;
+    height: 2px;
+    background-color: $tab-dropdown-arrow-color;
+    transition: all $tab-dropdown-speed ease-in-out;
+    content: '';
+  }
+
+  &:before {
+    @include rotate(45deg);
+    right: 20px;
+  }
+
+  &:after {
+    @include rotate(-45deg);
+    right: 15px;
+  }
+
+  &:hover,
+  &:focus {
+    box-shadow: inset 0 -2px 0 $tab-dropdown-border-color-hover;
+  }
+}
+
+
+// Tab List
+.tabs__list {
+  @include translate(Y, 10px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-color: $tab-dropdown-list-background-color;
+  opacity: 0;
+  visibility: hidden;
+
+  @include media(tablet) {
+    @include translate(Y, 0);
+    position: relative;
+    background: none;
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+
+// Tab Item
+.tabs__item {
+  display: inline-block;
+  width: 100%;
+  font-size: 14px;
+  line-height: 40px;
+
+  @include media(tablet) {
+    width: auto;
+    margin-right: 40px;
+  }
+}
+
+.tabs__link {
+  display: block;
+  color: $tab-link-color;
+  font-weight: 400;
+  padding: 0 16px;
+
+  @include media(tablet) {
+    font-weight: 700;
+    padding: 0;
+  }
+
+  &:hover {
+    font-weight: 700;
+    box-shadow: inset 4px 0 0 $dropdown-list-border-color-hover;
+    background-color: $tab-dropdown-list-background-color-hover;
+
+    @include media(tablet) {
+      color: $tab-link-color-hover;
+      box-shadow: none;
+      background: none;
+    }
+  }
+}
+
+[data-peripheral='keyboard'] .tabs__link:focus {
+  box-shadow: 0 0 0 1px $base-background,
+              0 0 3px 3px $blue-30;
+}
+
+// Selected Tab
+.tabs__item.is-selected {
+
+  @include media(tablet) {
+    border-bottom: 3px solid $tab-selected-link-color;
+
+    .tabs__link {
+      color: $tab-selected-link-color;
+    }
+  }
+}
+
+
+// Tab Panels
+.tab-panels {
+  position: relative;
+  margin-top: 20px;
+}
+
+.tab-panels__panel {
+  display: none;
+  background-color: $tab-panel-background-color;
+  padding: 30px;
+
+  &.is-selected {
+    display: block;
+  }
+}
+
+
+// Tabs Dropdown Focus
+[data-peripheral='keyboard'] .tabs__dropdown:focus {
+  box-shadow: 0 0 0 1px $base-background,
+              0 0 3px 3px $blue-30;
+  border-radius: 0;
+}

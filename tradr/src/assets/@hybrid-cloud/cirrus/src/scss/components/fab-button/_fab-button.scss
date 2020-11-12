@@ -1,0 +1,89 @@
+// Fab Button Variables
+@import 'fab-button-variables';
+
+
+// Fab Button
+.fab-button {
+  @include size(60px, 35px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: z(top);
+  background-color: $fab-button-background-color;
+  transition: background-color $fab-button-transition-speed ease-in-out;
+
+  &:before,
+  &:after {
+    @include size(0);
+    @include transition($fab-button-transition-speed);
+    position: absolute;
+    left: 0;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    content: '';
+  }
+
+  &:before {
+    bottom: 100%;
+    border-bottom: 18px solid $fab-button-background-color;
+  }
+
+  &:after {
+    top: 100%;
+    border-top: 18px solid $fab-button-background-color;
+  }
+
+  // Hover
+  &:hover {
+    background-color: $fab-button-background-color-hover;
+
+    &:before {
+      border-bottom-color: $fab-button-background-color-hover;
+    }
+
+    &:after {
+      border-top-color: $fab-button-background-color-hover;
+    }
+  }
+}
+
+.fab-button__label {
+  @include size(30px, 100%);
+  @include transition($fab-button-transition-speed);
+  position: absolute;
+  top: 0;
+  left: 15px;
+  color: $fab-button-label-color;
+  font-size: 36px;
+  line-height: 28px;
+}
+
+
+// Fab is Open
+.fab-button.is-open {
+  background-color: $fab-button-open-background-color;
+
+  &:before {
+    border-bottom-color: $fab-button-open-background-color;
+  }
+
+  &:after {
+    border-top-color: $fab-button-open-background-color;
+  }
+
+  .fab-button__label {
+    @include rotate(-135deg);
+    color: $fab-button-open-label-color;
+  }
+}
+
+
+// Focus
+.fab-button:focus {
+  outline: none;
+
+  [data-peripheral='keyboard'] & {
+    box-shadow: 0 0 0 20px $base-background,
+                0 0 2px 22px $blue-40;
+  }
+}

@@ -1,0 +1,47 @@
+// File Upload Variables
+@import 'file-upload-variables';
+
+
+// File Upload
+
+
+.file-upload__field {
+  float: left;
+
+  &.input--primary {
+    width: calc(100% - 150px);
+  }
+
+  &.input--secondary {
+    width: calc(100% - 170px);
+    margin-right: 20px;
+  }
+
+  &:empty:before {
+    content: attr(data-placeholder);
+    font-style: italic;
+  }
+}
+
+
+.file-upload__input {
+  position: absolute;
+  left: -9999px;
+
+}
+
+
+.file-upload__label {
+  float: right;
+  position: relative;
+  z-index: 1;
+  width: 150px;
+  cursor: pointer;
+}
+
+
+// File Upload Focus
+[data-peripheral='keyboard'] .file-upload__input:focus + .file-upload__label {
+  box-shadow: 0 0 0 1px $base-background,
+              0 0 2px 3px $blue-40;
+}

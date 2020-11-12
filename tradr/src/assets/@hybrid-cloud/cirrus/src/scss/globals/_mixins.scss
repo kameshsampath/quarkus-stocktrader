@@ -1,0 +1,204 @@
+// Ferret Mixins
+
+
+// Clearfix - use @extend %clearfix;
+%clearfix {
+  &:after {
+    display: table;
+    content: '';
+    clear: both;
+    flex-basis: 0;
+    order: 1;
+  }
+}
+
+
+// Transitions
+@mixin transition($speed: .15s, $ease: ease-in-out) {
+  transition: all $speed $ease;
+}
+
+@mixin transitioning($transition...) {
+  transition: $transition;
+}
+
+
+// Gradients
+@mixin gradient($origin, $start, $stop) {
+  background-image: linear-gradient($origin, $start, $stop);
+}
+
+
+// Rotate
+@mixin rotate($rotate, $axis: null) {
+  @if $axis {
+    transform: rotate#{to-upper-case($axis)}($rotate);
+  } @else {
+    transform: rotate($rotate);
+  }
+}
+
+
+// Scale
+@mixin scale($scale) {
+  transform: scale($scale);
+}
+
+
+// Perspective
+@mixin perspective($perspective) {
+  transform: perspective($perspective);
+}
+
+
+// Backface Visibility
+@mixin backface($backface: hidden) {
+  backface-visibility: $backface;
+}
+
+
+// Translate
+@mixin translate($x, $y: null, $z: null) {
+  @if $x == 'Y' {
+    transform: translateY($y);
+  } @else if $z {
+    transform: translate3d($x, $y, $z);
+  } @else if $y {
+    transform: translate($x, $y);
+  } @else {
+    transform: translateX($x);
+  }
+}
+
+
+// Animation
+@mixin animate($name, $speed: .2s, $ease: ease-in, $delay: .5s, $when: both) {
+  animation: $name $speed $ease $delay $when;
+}
+
+
+// Keyframes
+@mixin keyframes($name) {
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+
+// Width and Height
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+
+// Box Sizing
+@mixin box-sizing($box: border-box) {
+  box-sizing: $box;
+}
+
+
+// Triangles
+@mixin triangle($direction, $size, $color) {
+  position: absolute;
+  @include size(0);
+  content: '';
+  border: {
+    width: $size;
+    style: solid;
+    color: transparent;
+  };
+
+  @if $direction == up {
+    border: {
+      bottom-color: $color;
+    }
+  }
+
+  @if $direction == down {
+    border: {
+      top-color: $color;
+    }
+  }
+
+  @if $direction == left {
+    border: {
+      right-color: $color;
+    }
+  }
+
+  @if $direction == right {
+    border: {
+      left-color: $color;
+    }
+  }
+}
+
+
+// Font Face
+@mixin font-face-mixin($font-name, $font-path, $font-file, $font-weight: normal, $font-style: normal) {
+  @font-face {
+    font: {
+      family: '#{$font-name}';
+      weight: $font-weight;
+      style: $font-style;
+    }
+    src: url('#{$font-path}/#{$font-file}.woff2') format('woff2'),
+      url('#{$font-path}/#{$font-file}.woff') format('woff');
+  }
+}
+
+
+// REM Units with px fallback (assumes html is set to font-size: 62.5%)
+@mixin font-size($value: 1.6) {
+  // scss-lint:disable DuplicateProperty
+  font-size: $value + px;
+  font-size: ($value / 10) + rem;
+}
+
+
+// Z-Index
+@function z($level) {
+  $zindex: (
+    absolute: 10,
+    top: 9,
+    middle: 5,
+    base: 1,
+    hide: -1
+  );
+  @return map-get($zindex, $level);
+}
+
+
+// Media Query Mixin
+@mixin media($screen) {
+  @if $screen == phone {
+    @media (max-width: #{map-get($breakpoints, phone)}) {
+      @content;
+    }
+  } @else if $screen == small-tablet {
+    @media (min-width: #{map-get($breakpoints, small-tablet)}) {
+      @content;
+    }
+  } @else if $screen == tablet {
+    @media (min-width: #{map-get($breakpoints, tablet)}) {
+      @content;
+    }
+  } @else if $screen == only-tablet {
+    @media (min-width: #{map-get($breakpoints, tablet)}) and (max-width: #{map-get($breakpoints, device)}) {
+      @content;
+    }
+  } @else if $screen == device {
+    @media (max-width: #{map-get($breakpoints, device)}) {
+      @content;
+    }
+  } @else if $screen == desktop {
+    @media (min-width: #{map-get($breakpoints, desktop)}) {
+      @content;
+    }
+  } @else if $screen == large-desktop {
+    @media (min-width: #{map-get($breakpoints, large-desktop)}) {
+      @content;
+    }
+  }
+}

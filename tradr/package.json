@@ -1,0 +1,60 @@
+{
+  "name": "tradr",
+  "version": "1.0.0",
+  "private": true,
+  "license": "Apache-2.0",
+  "url": "https://github.com/IBMStockTrader/tradr",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IBMStockTrader/tradr.git"
+  },
+  "scripts": {
+    "serve": "vue-cli-service serve --open",
+    "build": "vue-cli-service build",
+    "test": "vue-cli-service test",
+    "e2e": "vue-cli-service e2e",
+    "lint": "vue-cli-service lint",
+    "e2e:open": "vue-cli-service e2e:open",
+    "start": "node ./bin/www",
+    "nodeshift": "nodeshift"
+  },
+  "dependencies": {
+    "aos": "^2.3.4",
+    "axios": "^0.18.1",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.4",
+    "debug": "^3.2.6",
+    "express": "^4.17.0",
+    "express-session": "^1.16.1",
+    "ibm-design-colors": "^2.0.4",
+    "jade": "^1.11.0",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.9.1",
+    "querystring": "^0.2.0",
+    "serve-favicon": "^2.5.0",
+    "vue": "^2.6.10",
+    "vue-router": "^3.0.6",
+    "vuejs-jwt": "^1.1.0",
+    "vuex": "^3.1.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.7.0",
+    "@vue/cli-plugin-e2e-cypress": "^3.7.0",
+    "@vue/cli-plugin-eslint": "^3.7.0",
+    "@vue/cli-plugin-unit-mocha": "^3.7.0",
+    "@vue/cli-service": "^3.7.0",
+    "@vue/eslint-config-prettier": "^3.0.5",
+    "@vue/test-utils": "^1.0.0-beta.29",
+    "chai": "^4.2.0",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^7.1.0",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^6.0.7",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}

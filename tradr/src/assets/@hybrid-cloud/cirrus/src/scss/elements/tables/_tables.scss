@@ -1,0 +1,204 @@
+// Tables Variables
+@import 'tables-variables';
+
+
+// Table Header
+.table-header {
+  width: 100%;
+  color: $table-header-color;
+  line-height: 30px;
+  background-color: $table-header-background-color;
+  padding: 10px 15px;
+  text-align: left;
+  font: {
+    size: 16px;
+    weight: 300;
+  }
+  border-bottom: 3px solid $table-header-border-color;
+
+  @include media(tablet) {
+    padding: 15px 20px;
+  }
+
+  @include media(desktop) {
+    padding: 15px 30px;
+  }
+}
+
+
+// Table
+.table {
+  width: 100%;
+  font-size: 12px;
+
+  @include media(tablet) {
+    font-size: 14px;
+  }
+}
+
+.table__row {
+  display: flex;
+  width: 100%;
+  padding: 5px 0;
+  max-width: calc(100vw - 30px);
+  flex-wrap: wrap;
+  border-bottom: 1px solid $table-row-border-color;
+
+  @include media(tablet) {
+    padding: 0;
+  }
+}
+
+.table__cell {
+  flex: 0 0 100%;
+  line-height: 20px;
+  padding: 5px 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @include media(tablet) {
+    flex: 1;
+    padding: 15px 20px;
+  }
+
+  @include media(desktop) {
+    padding: 15px 30px;
+  }
+}
+
+.table__cell-label {
+  display: inline-block;
+  font-weight: 700;
+  min-width: 40%;
+  padding-right: 15px;
+
+  @include media(tablet) {
+    display: none;
+  }
+}
+
+// Table Head
+.table__head {
+
+  .table__row {
+    display: none;
+    font-weight: 700;
+    background-color: $table-row-header-background-color;
+    border-bottom: 1px solid $table-header-border-color;
+
+    @include media(tablet) {
+      display: flex;
+    }
+
+    .table__cell {
+      @include transition();
+      position: relative;
+      text-align: left;
+      padding-right: 40px;
+
+      &:last-child {
+        border: 0;
+      }
+
+      &:hover {
+        box-shadow: inset 0 -3px 0 $table-row-header-border-color-hover;
+      }
+    }
+  }
+
+  .icon {
+    @include size(20px);
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    fill: $table-row-header-icon-color;
+  }
+}
+
+// Table Body
+.table__body {
+
+  .table__row {
+    @include transition();
+
+    &:nth-child(odd) {
+      background-color: $table-row-background-color-light;
+    }
+
+    &:nth-child(even) {
+      background-color: $table-row-background-color-dark;
+    }
+
+    &:last-child {
+      border-bottom: 1px solid $table-row-border-color;
+    }
+
+    &:hover {
+      background-color: $table-row-selected-background-color;
+      border-color: $table-row-border-color-hover;
+
+      &:last-child {
+        box-shadow: none; // Removes the fake border on the last row in the table since there is an actual border
+      }
+    }
+
+
+    // Selected Row
+    &.is-selected {
+      position: relative;
+      color: $table-row-selected-color;
+      background-color: $table-row-selected-background-color !important;
+      border-color: $table-row-selected-border-color;
+
+      &:last-child {
+        box-shadow: none;  // Removes the fake border on the last row in the table since there is an actual border
+      }
+
+      &:after {
+        @include size(5px, 100%);
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: $table-row-selected-marker-color;
+        content: '';
+      }
+
+      &:hover {
+        border-color: $table-row-selected-border-color;
+      }
+    }
+  }
+}
+
+
+// Status Icon
+.item-status {
+
+  &:before {
+    @include size(16px);
+    display: inline-block;
+    position: relative;
+    top: 2px;
+    background-color: $navy-gray-40;
+    border-radius: 50%;
+    margin-right: 15px;
+    content: '';
+  }
+}
+
+.item-status--critical:before {
+  background-color: $status-critical;
+}
+
+.item-status--escalated:before {
+  background-color: $status-escalated;
+}
+
+.item-status--warning:before {
+  background-color: $status-warning;
+}
+
+.item-status--normal:before {
+  background-color: $status-normal;
+}

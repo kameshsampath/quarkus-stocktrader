@@ -1,0 +1,23 @@
+// Container
+$container-small-tablet: 600px !default;
+$container-tablet: 768px !default;
+$container-normal: 960px !default;
+$container-wide: 1200px !default;
+
+
+// Grid
+$grid-row-name: row !default;
+$grid-column-name: box !default;
+$grid-column-count: 12 !default;
+$grid-gutter-width: 10px !default;
+
+
+// Media Query Sizes
+$breakpoints: (
+  phone: 599px,
+  small-tablet: 600px,
+  tablet: 768px,
+  device: 959px,
+  desktop: 960px,
+  large-desktop: 1280px
+) !default;

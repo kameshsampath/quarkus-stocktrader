@@ -1,0 +1,45 @@
+// Autocomplete Variables
+@import 'autocomplete-variables';
+
+
+// Autocomplete
+.list-autocomplete {
+  @include translate(Y, -20px);
+  @include transition(.3s);
+  position: absolute;
+  top: $autocomplete-list-top;
+  left: 0;
+  z-index: z(top);
+  width: 100%;
+  background-color: $autocomplete-background-color;
+  opacity: 0;
+  visibility: hidden;
+  max-height: ($autocomplete-item-height * 4);
+  overflow-y: auto;
+}
+
+.list-autocomplete__item {
+  @include transition();
+  color: $autocomplete-item-color;
+  line-height: $autocomplete-item-height;
+  padding: 0 15px;
+
+  &.is-selected {
+    color: $autocomplete-item-color-selected;
+    font-weight: 700;
+    box-shadow: inset 4px 0 0 $autocomplete-item-border-color-selected;
+    background-color: $autocomplete-item-background-color-selected;
+  }
+}
+
+// Autocomplete Is Visible
+.list-autocomplete.is-visible {
+  @include translate(Y, 0);
+  opacity: 1;
+  visibility: visible;
+}
+
+// Autocomplete item Is Visible
+.list-autocomplete__item:not(.is-visible) {
+  display: none;
+}

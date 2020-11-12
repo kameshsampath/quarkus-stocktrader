@@ -1,0 +1,318 @@
+// Global Header Variables
+@import 'global-header-variables';
+
+
+// Global Header
+.global-header {
+  @include size(100%, $global-header-height-mobile);
+  background-color: $blue-80;
+  padding-right: 60px;
+
+  @include media(small-tablet) {
+    height: $global-header-height;
+  }
+}
+
+.global-header__title {
+  float: left;
+  color: $shade-0;
+  line-height: 40px;
+  margin: 5px 0 10px 20px;
+  font: {
+    weight: 400;
+  }
+
+  @include media(small-tablet) {
+    margin: 10px 0 10px 30px;
+  }
+}
+
+
+// Header Overflow Button
+.global-header__overflow-button {
+  @include size($global-header-height-mobile);
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  @include media(small-tablet) {
+    height: $global-header-height;
+  }
+
+  @include media(tablet) {
+    display: none;
+  }
+
+  .icon--overflow {
+    @include size(20px);
+    fill: color('white');
+  }
+}
+
+
+// Header List
+.header-list {
+  @include translate(270px);
+  @include transition($global-header-nav-button-speed);
+  position: absolute;
+  top: 50px;
+  right: 0;
+  width: 270px;
+  background-color: $navy-gray-20;
+  padding: 20px 0;
+  opacity: 0;
+  visibility: hidden;
+
+  @include media(small-tablet) {
+    top: 60px;
+  }
+
+  @include media(tablet) {
+    @include translate(0);
+    display: flex;
+    float: right;
+    position: relative;
+    top: 0;
+    right: 0;
+    width: auto;
+    background: none;
+    padding: 0;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  // Header List Open
+  &.is-open {
+    @include translate(0);
+    z-index: z(top);
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.header-list__item {
+  @include transition();
+  line-height: 50px;
+
+  &:hover {
+    @include transition();
+    box-shadow: inset -4px 0 0 $blue-80;
+    background-color: $cool-white-4;
+  }
+
+  // scss-lint:disable DeclarationOrder
+  @include media(tablet) {
+    line-height: 40px;
+    padding: 10px 20px;
+
+    &:hover {
+      box-shadow: none;
+      background: none;
+    }
+  }
+
+  @include media(desktop) {
+    padding: 10px 30px;
+
+    &:hover {
+      box-shadow: inset 0 -4px 0 $global-header-hover-color;
+
+      .header-list__link .icon {
+        @include transition();
+        fill: $global-header-hover-color;
+      }
+
+      .header-list__link {
+        color: $global-header-hover-color;
+      }
+    }
+  }
+  // scss-lint:enable DeclarationOrder
+}
+
+.header-list__link {
+  display: block;
+  color: $blue-80;
+  padding: 0 20px;
+  font: {
+    size: 14px;
+    weight: 400;
+  }
+
+  @include media(tablet) {
+    color: $shade-0;
+    padding: 0;
+  }
+
+  .icon {
+    @include size(22px);
+    @include transition();
+    fill: $blue-80;
+    vertical-align: middle;
+    margin-right: 3px;
+
+    @include media(tablet) {
+      fill: $shade-0;
+    }
+  }
+}
+
+
+// Nav Button
+.global-header__nav-button {
+  @include size($global-header-height-mobile);
+  @include transition();
+  float: left;
+  position: relative;
+  background-color: $violet-70;
+  outline: none;
+
+  @include media(small-tablet) {
+    @include size($global-header-height);
+  }
+
+  &:hover {
+    background-color: $violet-50;
+  }
+
+  &:before,
+  &:after {
+    @include size(10px, 2px);
+    @include translate(Y, -50%);
+    position: absolute;
+    top: 50%;
+    background-color: $shade-0;
+    transition: all $global-header-nav-button-speed ease-in-out;
+    content: '';
+  }
+
+  &:before {
+    left: 15px;
+
+    @include media(small-tablet) {
+      left: 20px;
+    }
+  }
+
+  &:after {
+    right: 15px;
+
+    @include media(small-tablet) {
+      right: 20px;
+    }
+  }
+}
+
+.nav-button__icon {
+  @include size(20px, 2px);
+  @include translate(-50%, -50%);
+  position: absolute;
+  left: 25px;
+  transition: all $global-header-nav-button-speed ease-in-out;
+
+  @include media(small-tablet) {
+    left: 30px;
+  }
+
+  &:before,
+  &:after {
+    @include size(50%, 100%);
+    position: absolute;
+    background-color: $shade-0;
+    transition: all $global-header-nav-button-speed ease-in-out;
+    content: '';
+  }
+
+  &:before {
+    left: 0;
+  }
+
+  &:after {
+    right: 0;
+  }
+
+  &.icon--top {
+    top: 18px;
+    transition: all $global-header-nav-button-speed ease-in-out;
+
+    @include media(small-tablet) {
+      top: 23px;
+    }
+  }
+
+  &.icon--bottom {
+    bottom: 16px;
+    transition: all $global-header-nav-button-speed ease-in-out;
+
+    @include media(small-tablet) {
+      bottom: 21px;
+    }
+  }
+}
+
+
+// Is Open
+.global-header.is-open {
+
+  .global-header__nav-button {
+
+    &:before,
+    &:after {
+      opacity: 0;
+    }
+
+    &:before {
+      left: 6px;
+    }
+
+    &:after {
+      right: 6px;
+    }
+  }
+
+  .nav-button__icon {
+
+    &.icon--top {
+      top: 22px;
+
+      @include media(small-tablet) {
+        top: 27px;
+      }
+
+      &:before {
+        left: 2px;
+        transform: rotate(45deg);
+      }
+
+      &:after {
+        right: 2px;
+        transform: rotate(-45deg);
+      }
+    }
+
+    &.icon--bottom {
+      bottom: 20px;
+
+      @include media(small-tablet) {
+        bottom: 25px;
+      }
+
+      &:before {
+        left: 2px;
+        transform: rotate(-45deg);
+      }
+
+      &:after {
+        right: 2px;
+        transform: rotate(45deg);
+      }
+    }
+  }
+}
+
+
+// Nav Button Focus
+[data-peripheral='keyboard'] .global-header__nav-button:focus {
+  box-shadow: 0 0 2px 2px $blue-30;
+  border-radius: 0;
+}

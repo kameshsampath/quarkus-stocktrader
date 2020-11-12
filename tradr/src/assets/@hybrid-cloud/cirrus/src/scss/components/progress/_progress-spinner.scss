@@ -1,0 +1,54 @@
+// Pagination Variables
+@import 'progress-variables';
+
+
+// Keyframes
+@keyframes rotate {
+  50% {
+    transform: rotate(180deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes progressSpinner {
+  0%, 100% {
+    stroke-dasharray: 0 188;
+  }
+
+  20%, 90% {
+    stroke-dasharray: 172 188;
+  }
+}
+
+
+// Loading Spinner
+.progress-spinner {
+  @include size(80px);
+  border-radius: 50%;
+}
+
+.progress-spinner__circle {
+  animation: progressSpinner 6s ease infinite, rotate .8s linear infinite;
+  fill: none;
+  stroke-width: $progress-spinner-width;
+  stroke-dasharray: 0 188;
+  transform-origin: 50% 50%;
+}
+
+
+// Loading Spinner Small
+.progress-spinner--small {
+  transform: scale(.6);
+}
+
+
+// Loading Spinner Flat
+.progress-spinner--flat {
+
+  .progress-spinner__circle {
+    stroke: $blue-ci;
+  }
+}

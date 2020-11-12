@@ -1,0 +1,57 @@
+// Button Group Variables
+@import 'button-group-variables';
+
+
+// Button Group
+.button-group {
+  position: relative;
+}
+
+.button-group__radio {
+  position: absolute;
+  top: -30px;
+  left: -9999px;
+}
+
+.button-group__label {
+  @include transition();
+  display: inline-block;
+  width: 100%;
+  color: $button-group-color;
+  line-height: ($button-group-height - 2);
+  border: 1px solid $button-group-border-color;
+  padding: 0 $button-group-padding;
+  font: {
+    size: $button-group-font-size;
+    weight: $button-group-font-weight;
+  }
+  cursor: pointer;
+
+  @include media(small-tablet) {
+    width: auto;
+
+    &:not(:last-of-type) {
+      border-right: 0;
+    }
+  }
+
+  &:hover {
+    color: $button-group-color-hover;
+    background-color: $button-group-background-hover;
+  }
+}
+
+
+// Button Group Focus
+[data-peripheral='keyboard'] .button-group__radio:focus + .button-group__label {
+  box-shadow: 0 0 0 1px $base-background,
+              0 0 3px 3px $blue-30;
+  border-radius: 0;
+}
+
+
+// Button Group Selected
+.button-group__radio:checked + .button-group__label {
+  color: $button-group-color-selected;
+  background-color: $button-group-background-selected;
+}

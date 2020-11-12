@@ -1,0 +1,100 @@
+// Modal Variables
+@import 'modal-variables';
+
+
+// Modal
+.modal {
+  @include size(100%);
+  @include transition(.25s);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: z(absolute);
+  opacity: 0;
+  visibility: hidden;
+}
+
+
+// Modal Card
+.modal-card {
+  @include transition(.25s);
+  color: $modal-card-color;
+  box-shadow: 0 1px 3px 0 $modal-transparent-black;
+  background-color: $modal-card-background;
+
+  // Buttons
+  .button {
+    float: right;
+    padding: 0 20px;
+    min-width: 0;
+    margin-left: 5px;
+  }
+}
+
+.modal .modal-card {
+  @include size(calc(100% - 20px), auto);
+  @include translate(-50%, -40%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 30px;
+
+  @include media(tablet) {
+    width: 440px;
+  }
+}
+
+
+// Mobile Card Content
+.modal-card__heading {
+  color: $modal-card-color;
+}
+
+.modal .modal-card__heading {
+  font-weight: 400;
+}
+
+.modal-card__content {
+  font-size: 14px;
+}
+
+.modal-card__close {
+  @include size(16px);
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 0;
+}
+
+.icon--close-modal {
+  @include size(16px);
+  fill: $navy-gray-60;
+
+  &:hover {
+    @include rotate(360deg);
+    @include transition(.5s);
+  }
+}
+
+
+// Modal Icon
+.modal-card__icon {
+  float: left;
+  fill: $modal-card-color;
+}
+
+.modal .modal-card__icon {
+  @include size(28px);
+  margin-right: 8px;
+}
+
+
+// Modal Visible
+.modal.is-visible {
+  opacity: 1;
+  visibility: visible;
+
+  .modal-card {
+    @include translate(-50%, -50%);
+  }
+}

@@ -1,0 +1,30 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tradr
+  annotations:
+    app.kubernetes.io/part-of: Quarkus-DayTrader
+spec:
+  selector:
+    matchLabels:
+      app: tradr
+  template:
+    metadata:
+      labels:
+        app: tradr
+    spec:
+      containers:
+      - name: tradr
+        image: quay.io/kameshsampath/tradr
+        imagePullPolicy: Always
+        env:
+          - name: PORT
+            value: "8080"
+          - name: 
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080

@@ -1,0 +1,9 @@
+@import "~ibm-design-colors/ibm-colors";
+
+// Globals
+@import '../../../../cirrus/src/scss/globals/colors';
+@import '../../../../cirrus/src/scss/globals/settings';
+@import '../../../../cirrus/src/scss/globals/mixins';
+
+$path-fonts: "../../../../cirrus/dist/fonts";
+@import "../../../../cirrus/src/scss/core/grid/grid-variables";

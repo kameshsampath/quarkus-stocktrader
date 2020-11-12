@@ -1,0 +1,25 @@
+// Fonts
+@include font-face-mixin('IBM Helvetica', #{ $path-fonts + '/light' }, 'helvetica-neue-light', 200);
+@include font-face-mixin('IBM Helvetica', #{ $path-fonts + '/light-italic' }, 'helvetica-neue-light-italic', 200, italic);
+@include font-face-mixin('IBM Helvetica', #{ $path-fonts + '/light' }, 'helvetica-neue-light', 300);
+@include font-face-mixin('IBM Helvetica', #{ $path-fonts + '/light-italic' }, 'helvetica-neue-light-italic', 300, italic);
+@include font-face-mixin('IBM Helvetica', #{ $path-fonts + '/roman' }, 'helvetica-neue-roman', 400);
+@include font-face-mixin('IBM Helvetica', #{ $path-fonts + '/roman-italic' }, 'helvetica-neue-roman-italic', 400, italic);
+@include font-face-mixin('IBM Helvetica', #{ $path-fonts + '/bold' }, 'helvetica-neue-bold', 700);
+@include font-face-mixin('IBM Helvetica', #{ $path-fonts + '/bold-italic' }, 'helvetica-neue-bold-italic', 700, italic);
+
+// Font Mixin
+@mixin font($weight, $style: null) {
+  @if $weight == light {
+    font-weight: 300;
+  }
+  @if $weight == reg {
+    font-weight: 400;
+  }
+  @if $weight == bold {
+    font-weight: 700;
+  }
+  @if $style {
+    font-style: $style;
+  }
+}

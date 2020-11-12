@@ -1,0 +1,73 @@
+// Radio Button Variables
+@import 'radio-button-variables';
+
+
+// Radio Button
+.radio {
+  display: inline-block;
+  position: relative;
+  margin: 5px 0;
+}
+
+.radio__button {
+  position: absolute;
+  left: -9999px;
+}
+
+.radio__label {
+  color: $base-color;
+  font-size: 14px;
+  line-height: $radio-size;
+  padding-left: $radio-label-padding;
+  cursor: pointer;
+
+  &:before {
+    @include size($radio-size);
+    @include transition();
+    position: absolute;
+    top: 4px;
+    left: 0;
+    border: 2px solid $radio-border;
+    border-radius: 50%;
+    content: '';
+  }
+
+  &:hover {
+
+    &:before {
+      background-color: $radio-color-active;
+    }
+  }
+}
+
+
+// Radio Focus
+[data-peripheral='keyboard'] .radio__button:focus + .radio__label {
+  box-shadow: 0 0 0 9px $base-background,
+              0 0 2px 11px $blue-40;
+}
+
+
+// Radio Checked
+.radio__button:checked + .radio__label {
+
+  &:before {
+    box-shadow: inset 0 0 0 3px $base-background;
+    background-color: $radio-color-active;
+  }
+}
+
+
+// Radio Disabled
+.radio.is-disabled {
+
+  .radio__label {
+    color: $navy-gray-30;
+    cursor: not-allowed;
+
+    &:before {
+      background: none !important;
+      border-color: $navy-gray-30;
+    }
+  }
+}
