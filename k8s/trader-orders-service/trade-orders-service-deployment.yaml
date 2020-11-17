@@ -1,0 +1,29 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: trade-orders-service
+  annotations:
+    app.kubernetes.io/part-of: Quarkus-DayTrader
+spec:
+  selector:
+    matchLabels:
+      app: trade-orders-service
+  template:
+    metadata:
+      labels:
+        app: trade-orders-service
+    spec:
+      containers:
+      - name: tradr
+        image: quay.io/kameshsampath/trade-orders-service
+        imagePullPolicy: Always
+        env:
+          - name: PORT
+            value: "8080"
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080

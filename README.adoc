@@ -1,9 +1,0 @@
-= Quarkus Stock Trader
-:experimental:
-
-The https://github.com/IBMStockTrader[IBMStockTrader] application rebuilt with https://quarkus.io[Quarkus]
-
-== Modules 
-
-- link:./quarkus-portfolio[Portfolio]
-- link:./quarkus-stock-quote[StockQuote]
