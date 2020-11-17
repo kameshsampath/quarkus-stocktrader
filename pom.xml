@@ -38,6 +38,7 @@
   <modules>
     <module>quarkus-stock-quote</module>
     <module>quarkus-portfolio</module>
+    <module>trade-orders-service</module>
   </modules>
   <build>
     <plugins>

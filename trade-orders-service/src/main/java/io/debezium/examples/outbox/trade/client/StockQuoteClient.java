@@ -14,8 +14,9 @@
    limitations under the License.
  */
 
-package dev.kameshs.stocktrader.portfolio.client;
+package io.debezium.examples.outbox.trade.client;
 
+import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -26,7 +27,7 @@ import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 public interface StockQuoteClient {
 
   @GET
-  @Path("/quotes")
+  @Path("/")
   @Produces("application/json")
   public Quote[] getAllCachedQuotes();
 
@@ -38,5 +39,5 @@ public interface StockQuoteClient {
   @GET
   @Path("/symbols")
   @Produces("application/json")
-  public Symbol allSymbols();
+  public List<Symbol> symbols();
 }

@@ -2,8 +2,11 @@ package dev.kameshs.stocktrader;
 
 import dev.kameshs.stocktrader.client.IEXClient;
 import dev.kameshs.stocktrader.client.Quote;
+import dev.kameshs.stocktrader.client.Symbol;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.GET;
@@ -19,7 +22,8 @@ import org.eclipse.microprofile.rest.client.inject.RestClient;
 public class StockQuoteResource {
 
   private static final Logger LOGGER = Logger.getLogger(
-      StockQuoteResource.class.getName());
+    StockQuoteResource.class.getName());
+
   @Inject
   @RestClient
   IEXClient iexClient;
@@ -27,8 +31,28 @@ public class StockQuoteResource {
   @ConfigProperty(name = "iex.api.key")
   String iexApiKey;
 
+  @PostConstruct
+  @Transactional
+  void init() {
+    LOGGER.log(Level.ALL, "Querying Symbols from API");
+    iexClient
+      .allSymbols(iexApiKey)
+      .forEach(s -> s.persist());
+  }
+
   @GET
-  @Path("/")
+  @Path("/symbols")
+  @Produces(MediaType.APPLICATION_JSON)
+  @Transactional
+  public Response allSymbols() {
+    List<Symbol> symbols = Symbol.listAll();
+    return Response.ok()
+                   .entity(Symbol.listAll())
+                   .build();
+  }
+
+  @GET
+  @Path("/quotes")
   @Produces(MediaType.APPLICATION_JSON)
   public Response allQuotes() {
     return Response.ok()

@@ -15,7 +15,7 @@
  */
 package dev.kameshs.stocktrader.client;
 
-import javax.enterprise.context.Dependent;
+import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -30,5 +30,10 @@ public interface IEXClient {
   @Path("/stock/{symbol}/quote")
   @Produces("application/json")
   public Quote getStockQuoteViaIEX(@PathParam("symbol") String symbol,
-      @QueryParam("token") String token);
+    @QueryParam("token") String token);
+
+  @GET
+  @Path("/ref-data/symbols")
+  @Produces("application/json")
+  public List<Symbol> allSymbols(@QueryParam("token") String token);
 }
