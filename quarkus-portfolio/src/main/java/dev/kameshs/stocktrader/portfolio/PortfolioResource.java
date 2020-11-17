@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.DELETE;
@@ -42,6 +44,7 @@ public class PortfolioResource {
 
   @GET
   @Path("/all")
+  @PermitAll
   @Produces(MediaType.APPLICATION_JSON)
   @Transactional
   public Response getPortfolios() {
@@ -53,6 +56,7 @@ public class PortfolioResource {
   @GET
   @Path("/{owner}")
   @Produces(MediaType.APPLICATION_JSON)
+  @PermitAll
   @Transactional
   public Response getPortfolio(@PathParam("owner") String owner) {
     Portfolio portfolio = portfolioForOwner(owner);
@@ -69,6 +73,7 @@ public class PortfolioResource {
   @POST
   @Path("/{owner}")
   @Produces(MediaType.APPLICATION_JSON)
+  @RolesAllowed({"admins","api-admins","api-users"})
   @Transactional
   public Response createPortfolio(@PathParam("owner") String owner) {
     try {
@@ -96,6 +101,7 @@ public class PortfolioResource {
 
   @PUT
   @Path("/{owner}")
+  @RolesAllowed({"admins","api-admins","api-users"})
   @Produces(MediaType.APPLICATION_JSON)
   @Transactional
   public Response updatePortfolio(@PathParam("owner") String owner,
@@ -171,6 +177,7 @@ public class PortfolioResource {
   @DELETE
   @Path("/{owner}")
   @Produces(MediaType.APPLICATION_JSON)
+  @RolesAllowed({"admins","api-admins","api-users"})
   @Transactional
   public Response deletePortfolio(@PathParam("owner") String owner) {
     LOGGER.log(Level.INFO, "Deleting Portfolio for owner {0}", owner);

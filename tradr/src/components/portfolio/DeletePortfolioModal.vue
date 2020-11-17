@@ -71,7 +71,7 @@
                     // the default value for minimumFractionDigits depends on the currency
                     // and is usually already 2
                 })
-                axios.delete(url, {headers: {'Authorization': 'Bearer ' + this.$jwt.getToken()}})
+                axios.delete(url, {headers: {'Authorization': 'Bearer ' + this.$store.getters.jwtToken}})
                     .then(response => {
                         console.log('Deletion response')
                         console.log(response)

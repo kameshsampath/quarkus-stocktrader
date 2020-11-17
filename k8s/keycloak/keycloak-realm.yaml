@@ -1,0 +1,20 @@
+apiVersion: keycloak.org/v1alpha1
+kind: KeycloakRealm
+metadata:
+  name: stocktrader
+  labels:
+    realm: stocktrader
+spec:
+  instanceSelector:
+    matchExpressions:
+      - key: app
+        operator: in
+        values:
+          - stocktrader-keycloak
+    matchLabels:
+      app: sso
+  realm:
+    displayName: Basic Realm
+    enabled: true
+    id: stocktrader
+    realm: stocktrader

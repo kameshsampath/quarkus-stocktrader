@@ -67,7 +67,7 @@
                     // the default value for minimumFractionDigits depends on the currency
                     // and is usually already 2
                 })
-                axios.post(url, '', {headers: {'Authorization': 'Bearer ' + this.$jwt.getToken()}})
+                axios.post(url, '', {headers: {'Authorization': 'Bearer ' + this.$store.getters.jwtToken}})
                     .then(response => {
                         console.log('Here is the reponse')
                         console.log(response)

@@ -1,0 +1,11 @@
+---
+namespace: keycloak
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+
+resources:
+ - keycloak-cr.yaml
+ - keycloak-realm.yaml
+#- keycloak-user.yaml

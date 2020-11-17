@@ -16,8 +16,8 @@
 
 import Vue from 'vue'
 import Router from 'vue-router'
-import Main from '@/components/Main'
-import Person from '@/components/person/Person'
+import Main from './components/Main'
+import Person from './components/person/Person'
 
 Vue.use(Router)
 

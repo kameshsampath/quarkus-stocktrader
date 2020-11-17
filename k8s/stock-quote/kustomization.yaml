@@ -1,0 +1,10 @@
+---
+namespace: daytrader-dev
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+resources:
+  - quarkus-stock-quote-service.yaml
+  - quarkus-stock-quote-deployment.yaml
+#  - quarkus-stock-quote-route.yaml

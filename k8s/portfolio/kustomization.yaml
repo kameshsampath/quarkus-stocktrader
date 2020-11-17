@@ -1,0 +1,10 @@
+---
+namespace: daytrader-dev
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+resources:
+ - quarkus-portfolio-deployment.yaml
+ - quarkus-portfolio-service.yaml
+ - quarkus-portfolio-route.yaml

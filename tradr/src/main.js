@@ -20,18 +20,58 @@ import router from "./router";
 import { store } from "./store";
 import Vuex from 'vuex'
 import VueJWT from 'vuejs-jwt'
+import KeyCloak from 'keycloak-js'
 
 // HC CTO Artifacts
 import CirrusVue from '@hybrid-cloud/cirrus-vue/src/components/index'
+
+let kcInitOptions = {
+  url: process.env.KEYCLOAK_AUTH_URL,
+  realm: process.env.KEYCLOAK_REALM,
+  clientId: process.env.KEYCLOAK_CLIENT_ID,
+  onLoad: 'login-required'
+}
+
+//console.log(kcInitOptions);
+
+let keycloak = new KeyCloak(kcInitOptions)
 
 Vue.config.devtools = true;
 Vue.config.productionTip = false;
 Vue.use(CirrusVue);
 Vue.use(Vuex);
-Vue.use(VueJWT, {storage: 'localStorage', keyName: 'user_jwt'})
+Vue.use(VueJWT, { storage: 'localStorage', keyName: 'user_jwt' })
 
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount("#app");
+keycloak.init({ onLoad: kcInitOptions.onLoad }).then((auth) => {
+  if (!auth) {
+    window.location.reload();
+  } else {
+    //console.log(keycloak);
+    new Vue({
+      router,
+      store,
+      render: h => h(App)
+    }).$mount("#app");
+    store.commit("userName",keycloak);
+    console.log("Authenticated");
+  }
+
+  // //Token refresh
+  // setInterval(() => {
+  //   keycloak.updateToken(70).then((refreshed) => {
+  //     if (refreshed) {
+  //       Vue.$log.info('Token refreshed' + refreshed);
+  //     } else {
+  //       Vue.$log.warn('Token not refreshed, valid for '
+  //         + Math.round(keycloak.tokenParsed.exp + keycloak.timeSkew - new Date().getTime() / 1000) + ' seconds');
+  //     }
+  //   }).catch(() => {
+  //     Vue.$log.error('Failed to refresh token');
+  //   });
+  // }, 6000)
+  // }).catch(() => {
+  //   Vue.$log.error("Authenticated Failed");
+  // });
+
+})
+

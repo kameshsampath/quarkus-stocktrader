@@ -51,17 +51,20 @@ export const store =  new Vuex.Store({
     // Mutation for when you use it as state property
     mutations: {
         userName(state, payload) {
-            state.userName = payload.userName;
-            state.userData = payload.userData;
-            state.jwt_token = payload.jwt_token;
+            console.log("Mutate KeyCloak %s", JSON.stringify(payload.tokenParsed));
+            var userAttrs = payload.tokenParsed;
+            state.userName = userAttrs.given_name +" "+userAttrs.family_name;
+            state.userData = { id: userAttrs.preferred_username,email:userAttrs.email};
+            state.jwt_token = payload.token;
             state.refreshToken = payload.refreshToken;
-            state.accessToken=payload.accessToken;
+            state.accessToken = payload.token;
         }
     },
 
     actions: {
         // Perform VueAuthenticate login using Vuex actions
-        userName(context) {
+      userName (context) {
+        //console.log("Action KeyCloak %s", JSON.stringify(context));
             // axios.get('user/', {headers: {'Authorization': 'Bearer '+localStorage.getItem("user_jwt")}}).then(response => {
             //     if (response.data === null) {
             //         console.log('no session on response')

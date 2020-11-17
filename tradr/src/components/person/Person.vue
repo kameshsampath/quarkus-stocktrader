@@ -159,7 +159,7 @@ export default {
         },
         getPortfolio(user) {
             console.log('user is ' + user);
-            axios.get('/' + user, {headers: {'Authorization': 'Bearer ' + this.$jwt.getToken()}})
+            axios.get('/' + user, {headers: {'Authorization': 'Bearer ' + this.$store.getters.jwtToken}})
                 .then(response => {
                     console.log('here comes the response from viewPortfolio');
                     var person = response.data;
@@ -177,7 +177,7 @@ export default {
         },
         getPortfolioReturns(user) {
             console.log('getting returns for ' + user + ' with current portfolio value ' + this.portfolioValue);
-            axios.get('/' + user + '/returns', {headers: {'Authorization': 'Bearer ' + this.$jwt.getToken()}})
+            axios.get('/' + user + '/returns', {headers: {'Authorization': 'Bearer ' + this.$store.getters.jwtToken}})
                 .then(response => {
                     console.log('response from getting ROI');
                     var returnPercentage = response.data;

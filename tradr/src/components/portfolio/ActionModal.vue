@@ -79,7 +79,8 @@
                     config = {
                         method: 'put',
                         url: '/' + this.portfolio.owner,
-                        headers: {'Authorization': 'Bearer ' + this.$jwt.getToken()},
+                        //{headers: {'Authorization': 'Bearer ' + this.$store.getters.jwtToken}}
+                        headers: {'Authorization': 'Bearer ' + this.$store.getters.jwtToken},
                         params: params
                     }
 
@@ -92,7 +93,8 @@
                     config = {
                         method: 'put',
                         url: '/' + this.portfolio.owner,
-                        headers: {'Authorization': 'Bearer ' + this.$jwt.getToken()},
+                        //{headers: {'Authorization': 'Bearer ' + this.$store.getters.jwtToken}}
+                        headers: {'Authorization': 'Bearer ' + this.$store.getters.jwtToken},
                         params: params
                     }
 
@@ -101,7 +103,8 @@
                     config = {
                         method: 'delete',
                         url: '/' + this.portfolio.owner,
-                        headers: {'Authorization': 'Bearer ' + this.$jwt.getToken()},
+                        //{headers: {'Authorization': 'Bearer ' + this.$store.getters.jwtToken}}
+                        headers: {'Authorization': 'Bearer ' + this.$store.getters.jwtToken},
 
                     }
                     console.log('DELETE: ' + this.portfolio.owner);

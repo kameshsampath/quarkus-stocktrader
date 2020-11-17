@@ -82,21 +82,21 @@
                 if (profileData) {
                     this.changeValue(this.data, profileData.owner, profileData.total)
                 } else {
-                    console.log("Getting portfolio with auth token")
-                    axios.get('/all', {headers: {'Authorization': 'Bearer ' + this.$jwt.getToken()}})
+                    console.log("Getting portfolio with auth token ")
+                    axios.get('/all', {headers: {'Authorization': 'Bearer ' + this.$store.getters.jwtToken}})
                         .then(response => {
                             console.log("Got portfolios {}",response.data);
                             for (var i in response.data) {
                                 console.log(response.data[i]);
                                 this.data.push(response.data[i]);
-                            }                            
+                            }
                         })
                         .catch(e => {
                             console.log(e)
                             console.log("trying with credentials from local store");
                             //It looks like there is a race condition here between $jwt and the storage of tokens in localstorage
                             //so let's fall back to localStorage just in case.
-                            axios.get('/all', {headers: {'Authorization': 'Bearer '+localStorage.getItem("user_jwt")}})
+                            axios.get('/all', {headers: {'Authorization': 'Bearer ' + this.$store.getters.jwtToken}})
                                 .then(response => {
                                     for (var i in response.data) {
                                         console.log(response.data[i]);
