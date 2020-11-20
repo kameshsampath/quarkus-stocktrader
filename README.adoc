@@ -1,0 +1,126 @@
+= Quarkus Stock Trader
+
+The https://github.com/IBMStockTrader[IBMStockTrader] application rebuilt with https://quarkus.io[Quarkus].
+
+== Pre-requisites
+
+* https://try.openshift.com[OpenShift4 Cluster]
+* https://www.docker.com/products/docker-desktop[Docker for Mac/Windows/Liux]
+* https://github.com/mikefarah/yq[yq tool]
+
+== Prepare Cluster
+
+Ensure the following operators are installed in cluster:
+
+- https://operatorhub.io/operator/strimzi-kafka-operator[Strimzi Kafka]
+- https://operatorhub.io/operator/keycloak-operator[Keycloak]
+
+[NOTE]: In OpenShift the operators can be installed via Operator Hub integration from Adminstrator console.
+
+== Clone the sources
+
+[source,bash]
+----
+git clone https://github.com/kameshsampath/quarkus-stocktrader
+----
+
+We will refer to the cloned project sources folder as `$PROJECT_HOME`.
+
+[source,bash]
+----
+cd $PROJECT_HOME
+----
+
+== Deploy Keycloak
+
+[source,bash]
+----
+oc apply -k k8s/keycloak
+----
+
+[IMPORTANT]
+====
+Because of the limitations with Keycloak Operator, the roles needs to be manually created by login into the Keycloak console.
+====
+
+To retrive the Keycloak `ADMIN_USERNAME` and `ADMIN_PASSWORD` run the following command:
+
+[source,bash]
+----
+export ADMIN_USERNAME=$(kubectl get secrets credential-stocktrader-keycloak -oyaml | yq r - data.ADMIN_USERNAME | base64 -d)
+export ADMIN_PASSWORD=$(kubectl get secrets credential-stocktrader-keycloak -oyaml | yq r - data.ADMIN_PASSWORD | base64 -d)
+----
+
+You can find the Keycloak web console url using the command `oc get -n keycloak routes`.
+
+== Deploy Modules
+
+Obtain an API Key from https://iexcloud.io/[IEXCloud], copy the file  link:./k8s/stock-quote/base/api-keys.env.example[ $PROJECT_HOME/k8s/stock-quote/base/api-keys.env.example] to
+`$PROJECT_HOME/k8s/stock-quote/base/api-keys.env`:
+
+[source,bash]
+----
+cp $PROJECT_HOME/k8s/stock-quote/base/api-keys.env.example $PROJECT_HOME/k8s/stock-quote/base/api-keys.env
+----
+
+Edit and update the _IEX_API_KEY_ key in the file `$PROJECT_HOME/k8s/stock-quote/base/api-keys.env` to match your API Key.
+
+* link:./quarkus-stock-quote[StockQuote]
+[source,bash]
+----
+oc apply -k k8s/stock-quote/prod
+----
+
+* link:./quarkus-portfolio[Portfolio]
+[source,bash]
+----
+oc apply -k k8s/portfolio/prod
+----
+
+* link:./trade-orders-service[Trader Orders]
+[source,bash]
+----
+oc apply -k k8s/trade-orders-service/prod
+----
+
+* link:./tradr[Tradr]
+[source,bash]
+----
+oc apply -k k8s/tradr/prod
+----
+
+== Kafka Mirror Maker
+
+[IMPORTANT]
+====
+This should be done only on the *target* clusters, i.e. the clusters where the topics/data needs to mirrored, from the Kafka Cluster where sampledaytrader8 is deployed.
+====
+
+Copy the link:./k8s/kafka-mirrormaker/daytrader-mirrormaker-example.yaml[$PROJECT_HOME/k8s/kafka-mirrormaker/daytrader-mirrormaker-example.yaml] to `$PROJECT_HOME/k8s/kafka-mirrormaker/daytrader-mirrormaker.yaml`:
+
+[source,bash]
+----
+cp $PROJECT_HOME/k8s/kafka-mirrormaker/daytrader-mirrormaker-example.yaml  $PROJECT_HOME/k8s/kafka-mirrormaker/daytrader-mirrormaker.yaml
+----
+
+Edit and update the `$PROJECT_HOME/k8s/kafka-mirrormaker/daytrader-mirrormaker.yaml` for Kafka cluster external bootstrapserver LoadBalancer IP Address.
+
+The Kafka cluster *bootstrapservers* can be retrieved using the command:
+
+[source,bash]
+----
+oc get svc -n daytrader daytrader-kafka-external-bootstrap \
+  -ojsonpath='{.status.loadBalancer.ingress[0].ip}'
+----
+
+[source,bash]
+----
+oc apply -k k8s/kafka-mirrormaker/prod
+----
+
+== Building Application Container Images
+
+[source,bash]
+----
+make all
+----

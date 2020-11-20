@@ -1,5 +1,13 @@
 ---
+generatorOptions:
+  disableNameSuffixHash: true
+  
+secretGenerator:
+  - name: quarkus-portfolio
+    envs:
+      - api-keys.env
 resources:
   - deployment.yaml
   - service.yaml
+# enable this if you want to expose the stock-quote route to external world
 #  - route.yaml

@@ -38,3 +38,4 @@ nb-configuration.xml
 index.html
 webpack.config.js
 **/daytrader-mirrormaker.yaml
+**/api-keys.env
