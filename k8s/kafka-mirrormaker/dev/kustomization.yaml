@@ -1,0 +1,8 @@
+---
+namespace: daytrader-dev
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+bases:
+  - ../base

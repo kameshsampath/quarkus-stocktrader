@@ -1,0 +1,26 @@
+apiVersion: keycloak.org/v1alpha1
+kind: KeycloakClient
+metadata:
+  name: tradr
+  labels:
+    app: stocktrader
+spec:
+  realmSelector:
+    matchLabels:
+      app: stocktrader
+  client:
+    clientId: tradr
+    enabled: true
+    rootUrl: https://tradr-daytrader-test.apps.gcp.kameshs.dev
+    redirectUris:
+      - https://tradr-daytrader-test.apps.gcp.kameshs.dev/*
+    defaultClientScopes:
+      - microprofile-jwt
+      - email
+      - profile
+      - roles
+      - web-origin
+    optionalClientScopes:
+      - address
+      - offline_access
+      - phone

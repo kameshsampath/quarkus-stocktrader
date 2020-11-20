@@ -3,7 +3,7 @@ kind: KeycloakRealm
 metadata:
   name: stocktrader
   labels:
-    realm: stocktrader
+    app: stocktrader
 spec:
   instanceSelector:
     matchExpressions:
@@ -14,7 +14,8 @@ spec:
     matchLabels:
       app: sso
   realm:
-    displayName: Basic Realm
+    displayName: Stocktrader Realm
     enabled: true
     id: stocktrader
     realm: stocktrader
+    

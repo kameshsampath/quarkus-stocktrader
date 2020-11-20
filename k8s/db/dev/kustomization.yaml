@@ -4,7 +4,10 @@ namespace: daytrader-dev
 generatorOptions:
   disableNameSuffixHash: true
 
+
+bases:
+  - ../adminer
+  - ../postgresql
+
 resources:
- - tradr-deployment.yaml
- - tradr-service.yaml
- - tradr-route.yaml
+  - namespace.yaml

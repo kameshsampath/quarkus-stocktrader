@@ -1,0 +1,6 @@
+---
+resources:
+ - deployment.yaml
+ - pgdata-pvc.yaml
+ - pgwal-pvc.yaml
+ - service.yaml

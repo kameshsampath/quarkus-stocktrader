@@ -1,0 +1,20 @@
+---
+apiVersion: keycloak.org/v1alpha1
+kind: KeycloakUser
+metadata:
+  name: user1
+spec:
+  realmSelector:
+    matchLabels:
+      app: stocktrader
+  user:
+    enabled: true
+    emailVerified: true
+    username: user1
+    firstName: User
+    lastName: One
+    email: user1@example.com
+    realmRoles:
+      - api-users
+      - api-admins
+      

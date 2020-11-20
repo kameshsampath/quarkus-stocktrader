@@ -1,0 +1,12 @@
+---
+namespace: daytrader
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+bases:
+  - ../adminer
+  - ../postgresql
+
+resources:
+  - namespace.yaml

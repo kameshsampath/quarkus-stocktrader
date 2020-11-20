@@ -1,0 +1,22 @@
+---
+
+bases:
+  - ../base
+
+secretGenerator:
+  - name: credential-stocktrader-keycloak
+    literals:
+      - ADMIN_USERNAME=admin
+      - ADMIN_PASSWORD=admin
+
+resources:
+  - keycloak-ingress.yaml
+  - keycloak-operator.yaml
+
+patches:
+  - path: patch.json
+    target:
+      group: keycloak.org
+      version: v1alpha1
+      kind: Keycloak
+      name: stocktrader-keycloak
