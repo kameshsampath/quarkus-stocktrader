@@ -55,6 +55,24 @@ You can find the Keycloak web console url using the command `oc get -n keycloak 
 
 == Deploy Modules
 
+=== Prepare Database
+
+[source,bash]
+----
+oc apply -k $PROJECT_HOME/k8s/db/postgresql/prod
+----
+
+Deploy the DB Admin console:
+
+[source,bash]
+----
+oc apply -k $PROJECT_HOME/k8s/db/adminer/prod
+----
+
+Login to the database admin console using user `traderdb` and password `traderdb` and import the link:.db/schema.sql[schema].
+
+=== API Key
+
 Obtain an API Key from https://iexcloud.io/[IEXCloud], copy the file  link:./k8s/stock-quote/base/api-keys.env.example[ $PROJECT_HOME/k8s/stock-quote/base/api-keys.env.example] to
 `$PROJECT_HOME/k8s/stock-quote/base/api-keys.env`:
 
@@ -65,25 +83,25 @@ cp $PROJECT_HOME/k8s/stock-quote/base/api-keys.env.example $PROJECT_HOME/k8s/sto
 
 Edit and update the _IEX_API_KEY_ key in the file `$PROJECT_HOME/k8s/stock-quote/base/api-keys.env` to match your API Key.
 
-* link:./quarkus-stock-quote[StockQuote]
+=== link:./quarkus-stock-quote[StockQuote]
 [source,bash]
 ----
 oc apply -k k8s/stock-quote/prod
 ----
 
-* link:./quarkus-portfolio[Portfolio]
+=== link:./quarkus-portfolio[Portfolio]
 [source,bash]
 ----
 oc apply -k k8s/portfolio/prod
 ----
 
-* link:./trade-orders-service[Trader Orders]
+=== link:./trade-orders-service[Trader Orders]
 [source,bash]
 ----
 oc apply -k k8s/trade-orders-service/prod
 ----
 
-* link:./tradr[Tradr]
+=== link:./tradr[Tradr]
 [source,bash]
 ----
 oc apply -k k8s/tradr/prod
