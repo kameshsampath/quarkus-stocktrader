@@ -61,15 +61,15 @@ public class TradeOrderService {
                                   .asText();
     final Date openDate = new Date(event.get("openDate")
                                         .asLong());
-    final String symbol = getMappedSymbol(event.get("symbol")
-                                               .asText());
+
+    final String symbol = event.get("symbol")
+                               .asText();
 
     final int quantity = event.get("quantity")
                               .asInt();
 
-    final Double price = updatePrice(symbol,
-      Double.parseDouble(event.get("price")
-                              .asText()));
+    final Double price = Double.parseDouble(event.get("price")
+                                                 .asText());
     final String orderFee = event.get("orderFee")
                                  .asText();
     final int accountId = event.get("accountId")

@@ -15,15 +15,14 @@ spec:
     - sourceCluster: "daytrader-kafka-gcp"
       targetCluster: "daytrader-kafka-aws"
       sourceConnector:
-        sourceConnector:
+        config:
+          replication.factor: 1
+          offset-syncs.topic.replication.factor: 1
+          sync.topic.acls.enabled: "false"
+        heartbeatConnector:
           config:
-            replication.factor: 1
-            offset-syncs.topic.replication.factor: 1
-            sync.topic.acls.enabled: "false"
-          heartbeatConnector:
-            config:
-              heartbeats.topic.replication.factor: 1
-          checkpointConnector:
-            config:
-              checkpoints.topic.replication.factor: 1
-          topicsPattern: "openshift.traderdb.outboxevent"
+            heartbeats.topic.replication.factor: 1
+        checkpointConnector:
+          config:
+            checkpoints.topic.replication.factor: 1
+        topicsPattern: "openshift.traderdb.outboxevent"

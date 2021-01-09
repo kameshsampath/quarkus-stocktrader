@@ -14,3 +14,4 @@ yarn-error.log
 !.env.example
 keycloak.json
 tmp
+!index.html

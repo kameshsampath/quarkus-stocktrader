@@ -16,6 +16,7 @@ FROM registry.access.redhat.com/ubi8/nginx-118
 USER 0
 COPY --from=builder /opt/app-root/output/ /tmp/src/dist
 COPY --from=builder /tmp/src/index.html /tmp/src/index.html
+COPY --from=builder /tmp/src/nginx.conf /tmp/src/nginx.conf
 
 RUN chown -R 1001:0 /tmp/src
 USER 1001
@@ -23,3 +24,4 @@ USER 1001
 RUN /usr/libexec/s2i/assemble
 
 CMD /usr/libexec/s2i/run
+

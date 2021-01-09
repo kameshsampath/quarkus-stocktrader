@@ -82,6 +82,3 @@ CREATE TABLE "public"."tradeorder" (
                                        "symbol" character varying(255),
                                        CONSTRAINT "tradeorder_pkey" PRIMARY KEY ("id")
 ) WITH (oids = false);
-
-
--- 2020-11-17 13:00:20.214103-05

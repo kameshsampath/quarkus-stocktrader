@@ -15,7 +15,7 @@ Ensure the following operators are installed in cluster:
 - https://operatorhub.io/operator/strimzi-kafka-operator[Strimzi Kafka]
 - https://operatorhub.io/operator/keycloak-operator[Keycloak]
 
-[NOTE]: In OpenShift the operators can be installed via Operator Hub integration from Adminstrator console.
+[NOTE]: In OpenShift the operators can be installed via Operator Hub integration from Administrator console.
 
 == Clone the sources
 
@@ -41,17 +41,61 @@ oc apply -k k8s/keycloak
 [IMPORTANT]
 ====
 Because of the limitations with Keycloak Operator, the roles needs to be manually created by login into the Keycloak console.
+
+The following roles need to be created:
+
+- api-admins
+- api-users
+- admins
+
+Add the `user1` part of the `api-admins`, to enable the user to perform API operations
 ====
 
-To retrive the Keycloak `ADMIN_USERNAME` and `ADMIN_PASSWORD` run the following command:
+To retrieve the Keycloak `ADMIN_USERNAME` and `ADMIN_PASSWORD` run the following command:
 
 [source,bash]
 ----
-export ADMIN_USERNAME=$(kubectl get secrets credential-stocktrader-keycloak -oyaml | yq r - data.ADMIN_USERNAME | base64 -d)
-export ADMIN_PASSWORD=$(kubectl get secrets credential-stocktrader-keycloak -oyaml | yq r - data.ADMIN_PASSWORD | base64 -d)
+export ADMIN_USERNAME=$(kubectl get secrets credential-stocktrader-keycloak -oyaml | yq e - '.data.ADMIN_USERNAME' | base64 -d)
+export ADMIN_PASSWORD=$(kubectl get secrets credential-stocktrader-keycloak -oyaml | yq e - '.data.ADMIN_PASSWORD' | base64 -d)
 ----
 
 You can find the Keycloak web console url using the command `oc get -n keycloak routes`.
+
+== Deploy Kafka
+
+[source,shell script]
+----
+oc apply -k k8s/kafka/prod
+----
+
+=== Kafka Mirror Maker
+
+[IMPORTANT]
+====
+This should be done only on the *target* clusters, i.e. the clusters where the topics/data needs to mirrored, from the Kafka Cluster where sampledaytrader8 is deployed.
+====
+
+Copy the link:./k8s/kafka-mirrormaker/daytrader-mirrormaker-example.yaml[$PROJECT_HOME/k8s/kafka-mirrormaker/daytrader-mirrormaker-example.yaml] to `$PROJECT_HOME/k8s/kafka-mirrormaker/daytrader-mirrormaker.yaml`:
+
+[source,bash]
+----
+cp $PROJECT_HOME/k8s/kafka-mirrormaker/daytrader-mirrormaker-example.yaml  $PROJECT_HOME/k8s/kafka-mirrormaker/daytrader-mirrormaker.yaml
+----
+
+Edit and update the `$PROJECT_HOME/k8s/kafka-mirrormaker/daytrader-mirrormaker.yaml` for Kafka cluster external bootstrapserver LoadBalancer IP Address.
+
+The Kafka cluster *bootstrapservers* can be retrieved using the command:
+
+[source,bash]
+----
+oc get svc -n daytrader daytrader-kafka-external-bootstrap \
+  -ojsonpath='{.status.loadBalancer.ingress[0].ip}'
+----
+
+[source,bash]
+----
+oc apply -k k8s/kafka-mirrormaker/prod
+----
 
 == Deploy Modules
 
@@ -59,14 +103,7 @@ You can find the Keycloak web console url using the command `oc get -n keycloak 
 
 [source,bash]
 ----
-oc apply -k $PROJECT_HOME/k8s/db/postgresql/prod
-----
-
-Deploy the DB Admin console:
-
-[source,bash]
-----
-oc apply -k $PROJECT_HOME/k8s/db/adminer/prod
+oc apply -k $PROJECT_HOME/k8s/db/prod
 ----
 
 Login to the database admin console using user `traderdb` and password `traderdb` and import the link:.db/schema.sql[schema].
@@ -105,35 +142,6 @@ oc apply -k k8s/trade-orders-service/prod
 [source,bash]
 ----
 oc apply -k k8s/tradr/prod
-----
-
-== Kafka Mirror Maker
-
-[IMPORTANT]
-====
-This should be done only on the *target* clusters, i.e. the clusters where the topics/data needs to mirrored, from the Kafka Cluster where sampledaytrader8 is deployed.
-====
-
-Copy the link:./k8s/kafka-mirrormaker/daytrader-mirrormaker-example.yaml[$PROJECT_HOME/k8s/kafka-mirrormaker/daytrader-mirrormaker-example.yaml] to `$PROJECT_HOME/k8s/kafka-mirrormaker/daytrader-mirrormaker.yaml`:
-
-[source,bash]
-----
-cp $PROJECT_HOME/k8s/kafka-mirrormaker/daytrader-mirrormaker-example.yaml  $PROJECT_HOME/k8s/kafka-mirrormaker/daytrader-mirrormaker.yaml
-----
-
-Edit and update the `$PROJECT_HOME/k8s/kafka-mirrormaker/daytrader-mirrormaker.yaml` for Kafka cluster external bootstrapserver LoadBalancer IP Address.
-
-The Kafka cluster *bootstrapservers* can be retrieved using the command:
-
-[source,bash]
-----
-oc get svc -n daytrader daytrader-kafka-external-bootstrap \
-  -ojsonpath='{.status.loadBalancer.ingress[0].ip}'
-----
-
-[source,bash]
-----
-oc apply -k k8s/kafka-mirrormaker/prod
 ----
 
 == Building Application Container Images
