@@ -3,8 +3,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: quarkus-stock-quote
-  annotations:
+  labels:
     app.kubernetes.io/part-of: Quarkus-DayTrader
+    app.kubernetes.io/name: quarkus
 spec:
   selector:
     matchLabels:

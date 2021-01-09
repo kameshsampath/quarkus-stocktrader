@@ -17,9 +17,9 @@
     <div>
         <table class="table">
             <caption v-if="caption" class="table-header">
-                <span class="u-text--bold">Clients</span>
+                <span class="u-text--bold">Sales Agents</span>
                 <hc-button class="js-modal" data-modal-target="Add Portfolio" hcStyle="primary"
-                           hc-icon-href="hc(add-new)" style="float: right;">Add Client
+                           hc-icon-href="hc(add-new)" style="float: right;">Add Agent
                 </hc-button>
             </caption>
             <thead v-if="headings" class="table__head">
