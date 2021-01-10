@@ -1,0 +1,127 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: daytrader-dev
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Channel
+metadata:
+  name: quarkus-stocktrader-app-latest
+  namespace: daytrader-dev
+spec:
+  type: GitHub
+  pathname: https://github.com/kameshsampath/quarkus-stocktrader.git
+---
+apiVersion: app.k8s.io/v1beta1
+kind: Application
+metadata:
+  name: quarkus-stocktrader-app
+  namespace: daytrader-dev
+spec:
+  componentKinds:
+    - group: apps.open-cluster-management.io
+      kind: Subscription
+  descriptor: {}
+  selector:
+    matchExpressions:
+      - key: app
+        operator: In
+        values:
+          - quarkus-stocktrader-app
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  name: quarkus-stocktrader-db
+  namespace: daytrader-dev
+  labels:
+    app: quarkus-stocktrader-app
+  annotations:
+    apps.open-cluster-management.io/github-path: k8s/db/dev
+spec:
+  channel: daytrader-dev/quarkus-stocktrader-app-latest
+  placement:
+    placementRef:
+      kind: PlacementRule
+      name: msa-clusters
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  name: quarkus-stocktrader-kafka
+  namespace: daytrader-dev
+  labels:
+    app: quarkus-stocktrader-app
+  annotations:
+    apps.open-cluster-management.io/github-path: k8s/kafka/dev
+spec:
+  channel: daytrader-dev/quarkus-stocktrader-app-latest
+  placement:
+    placementRef:
+      kind: PlacementRule
+      name: msa-clusters
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  name: quarkus-stocktrader-portfolio
+  namespace: daytrader-dev
+  labels:
+    app: quarkus-stocktrader-app
+  annotations:
+    apps.open-cluster-management.io/github-path: k8s/portfolio/dev
+spec:
+  channel: daytrader-dev/quarkus-stocktrader-app-latest
+  placement:
+    placementRef:
+      kind: PlacementRule
+      name: msa-clusters
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  name: quarkus-stocktrader-stock-quote
+  namespace: daytrader-dev
+  labels:
+    app: quarkus-stocktrader-app
+  annotations:
+    apps.open-cluster-management.io/github-path: k8s/stock-quote/dev
+spec:
+  channel: daytrader-dev/quarkus-stocktrader-app-latest
+  placement:
+    placementRef:
+      kind: PlacementRule
+      name: msa-clusters
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  name: quarkus-stocktrader-trader-orders-service
+  namespace: daytrader-dev
+  labels:
+    app: quarkus-stocktrader-app
+  annotations:
+    apps.open-cluster-management.io/github-path: k8s/trade-orders-service/dev
+spec:
+  channel: daytrader-dev/quarkus-stocktrader-app-latest
+  placement:
+    placementRef:
+      kind: PlacementRule
+      name: msa-clusters
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  name: quarkus-stocktrader-tradr
+  namespace: daytrader-dev
+  labels:
+    app: quarkus-stocktrader-app
+  annotations:
+    apps.open-cluster-management.io/github-path: k8s/tradr/dev
+spec:
+  channel: daytrader-dev/quarkus-stocktrader-app-latest
+  placement:
+    placementRef:
+      kind: PlacementRule
+      name: msa-clusters
