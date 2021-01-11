@@ -1,0 +1,8 @@
+{
+  "realm": "quarkus-demos",
+  "auth-server-url": "https://keycloak-keycloak.apps.aws.devx.red/auth/",
+  "ssl-required": "external",
+  "resource": "tradr",
+  "public-client": true,
+  "confidential-port": 0
+}

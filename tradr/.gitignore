@@ -10,9 +10,6 @@ yarn-error.log
 *.ntvs*
 *.njsproj
 *.sln
-.env
-!.env.example
-keycloak.json
 tmp
 !index.html
 !webpack.config.js
