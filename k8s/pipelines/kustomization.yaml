@@ -1,0 +1,5 @@
+---
+resources:
+ - pipeline-resources.yaml
+ - pipeline.yaml
+ - tradr-pipeline.yaml

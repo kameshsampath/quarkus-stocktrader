@@ -1,0 +1,85 @@
+---
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: quarkus-stocktrader-pipeline
+spec:
+  workspaces:
+    - name: shared-workspace
+  resources:
+    - name: build-image
+      type: image
+    - name: app-source
+      type: git
+  params:
+    - name: destination-image
+    - name: context-dir
+    - name: manifest-dir
+    - name: maven-mirror-url
+      default: "https://repo1.maven.org/maven2"
+  tasks:
+    - name: git-clone
+      taskRef:
+        name: git-clone
+        kind: ClusterTask
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+      params:
+        - name: url
+          value: https://github.com/kameshsampath/quarkus-stocktrader
+        - name: subdirectory
+          value: ""
+        - name: deleteExisting
+          value: "true"
+    - name: build-app
+      taskRef:
+        name: maven
+      runAfter:
+        - git-clone
+      workspaces:
+        - name: source
+          workspace: shared-workspace
+      params:
+        - name: MAVEN_MIRROR_URL
+          value: "$(params.maven-mirror-url)"
+        - name: CONTEXT_DIR
+          value: "$(params.context-dir)"
+        - name: GOALS
+          value:
+            - -DskipTests
+            - clean 
+            - package
+    - name: build-app-image
+      taskRef:
+        name: buildah
+        kind: ClusterTask
+      runAfter:
+        - build-app
+      workspaces:
+        - name: source
+          workspace: shared-workspace
+      params:
+        - name: IMAGE
+          value: "$(params.destination-image)"
+        - name: TLSVERIFY
+          value: "false"
+        - name: BUILD_EXTRA_ARGS
+          value: "--build-arg MAVEN_MIRROR_URL=$(params.maven-mirror-url)"
+    - name: deploy-app
+      taskRef:
+        name: openshift-client
+        kind: ClusterTask
+      params:
+        - name: ARGS
+          value:
+            - "apply"
+            - "-k"
+            - "/workspace/source/k8s/$(params.manifest-dir)/prod/"
+      resources:
+        inputs:
+          - name: source
+            resource: app-source
+      runAfter:
+        - build-app-image
+---

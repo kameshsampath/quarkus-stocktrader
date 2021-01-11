@@ -1,0 +1,65 @@
+---
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: tradr-pipeline
+spec:
+  workspaces:
+    - name: shared-workspace
+  resources:
+    - name: build-image
+      type: image
+    - name: app-source
+      type: git
+  params:
+    - name: destination-image
+      default: "image-registry.openshift-image-registry.svc:5000/daytrader/tradr"
+  tasks:
+    - name: git-clone
+      taskRef:
+        name: git-clone
+        kind: ClusterTask
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+      params:
+        - name: url
+          value: https://github.com/kameshsampath/quarkus-stocktrader
+        - name: subdirectory
+          value: ""
+        - name: deleteExisting
+          value: "true"
+    - name: build-app
+      taskRef:
+        name: buildah
+        kind: ClusterTask
+      runAfter:
+        - git-clone
+      workspaces:
+        - name: source
+          workspace: shared-workspace
+      params:
+        - name: IMAGE
+          value: "$(params.destination-image)"
+        - name: CONTEXT
+          value: tradr
+        - name: DOCKERFILE
+          value: ./tradr/Dockerfile
+        - name: TLSVERIFY
+          value: "false"
+    - name: deploy-app
+      taskRef:
+        name: openshift-client
+        kind: ClusterTask
+      params:
+        - name: ARGS
+          value:
+            - "apply"
+            - "-k"
+            - "/workspace/source/k8s/tradr/prod/"
+      resources:
+        inputs:
+          - name: source
+            resource: app-source
+      runAfter:
+        - build-app

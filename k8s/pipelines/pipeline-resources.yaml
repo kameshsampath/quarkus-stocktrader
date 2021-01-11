@@ -1,0 +1,72 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: git-source-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 500Mi
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: quarkus-stock-trader-git
+spec:
+  type: git
+  params:
+    - name: url
+      value: https://github.com/kameshsampath/quarkus-stock-trader
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: stock-quote-image
+spec:
+  type: image
+  params:
+    - name: url
+      value: image-registry.openshift-image-registry:5000/daytrader/quarkus-stock-quote
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: portfolio
+spec:
+  type: image
+  params:
+    - name: url
+      value: image-registry.openshift-image-registry:5000/daytrader/quarkus-portfolio
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: tradr
+spec:
+  type: image
+  params:
+    - name: url
+      value: image-registry.openshift-image-registry:5000/daytrader/tradr
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: trade-orders-service
+spec:
+  type: image
+  params:
+    - name: url
+      value: image-registry.openshift-image-registry:5000/daytrader/trade-orders-service
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: tradr-source
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 500Mi

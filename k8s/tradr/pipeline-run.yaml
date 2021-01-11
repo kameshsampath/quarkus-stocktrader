@@ -1,0 +1,22 @@
+---
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: tradr-pipeline-run
+spec:
+  pipelineRef:
+    name: tradr-pipeline
+  workspaces:
+    - name: shared-workspace
+      persistentvolumeclaim:
+        claimName: tradr
+  params:
+    - name: destination-image
+      value: image-registry.openshift-image-registry.svc:5000/daytrader/sampledaytrader8
+  resources:
+    - name: build-image
+      resourceRef:
+        name: tradr
+    - name: app-source
+      resourceRef:
+        name: quarkus-stock-trader-git

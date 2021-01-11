@@ -1,0 +1,30 @@
+---
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: quarkus-stocktrader-pipeline-run
+spec:
+  pipelineRef:
+    name: quarkus-stocktrader-pipeline
+  workspaces:
+    - name: shared-workspace
+      persistentvolumeclaim:
+        claimName: git-source-pvc
+    - name: maven-settings
+      emptyDir: {}
+  params:
+    - name: destination-image
+      value: image-registry.openshift-image-registry.svc:5000/daytrader-test/quarkus-portfolio
+    - name: context-dir
+      value: quarkus-portfolio
+    - name: manifest-dir
+      value: portfolio
+    - name: maven-mirror-url
+      value: "http://nexus.infra:8081/nexus/content/groups/public"
+  resources:
+    - name: build-image
+      resourceRef:
+        name: portfolio
+    - name: app-source
+      resourceRef:
+        name: quarkus-stock-trader-git
