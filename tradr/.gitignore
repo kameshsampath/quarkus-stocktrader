@@ -15,3 +15,4 @@ yarn-error.log
 keycloak.json
 tmp
 !index.html
+!webpack.config.js

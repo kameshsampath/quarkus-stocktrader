@@ -6,6 +6,7 @@ metadata:
 spec:
   workspaces:
     - name: shared-workspace
+    - name: maven-settings
   resources:
     - name: build-image
       type: image
@@ -40,6 +41,8 @@ spec:
       workspaces:
         - name: source
           workspace: shared-workspace
+        - name: maven-settings
+          workspace: maven-settings
       params:
         - name: MAVEN_MIRROR_URL
           value: "$(params.maven-mirror-url)"
