@@ -65,6 +65,10 @@ spec:
       params:
         - name: IMAGE
           value: "$(params.destination-image)"
+        - name: DOCKERFILE
+          value: "$(params.context-dir)/src/main/docker/Dockerfile.jvm"
+        - name: CONTEXT
+          value: "$(params.context-dir)"
         - name: TLSVERIFY
           value: "false"
         - name: BUILD_EXTRA_ARGS

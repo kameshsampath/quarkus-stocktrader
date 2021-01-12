@@ -14,9 +14,9 @@ spec:
       emptyDir: {}
   params:
     - name: destination-image
-      value: image-registry.openshift-image-registry.svc:5000/daytrader-test/trader-order-service
+      value: image-registry.openshift-image-registry.svc:5000/daytrader/trade-orders-service
     - name: context-dir
-      value: trader-order-service
+      value: trade-orders-service
     - name: manifest-dir
       value: trade-orders-service
     - name: maven-mirror-url

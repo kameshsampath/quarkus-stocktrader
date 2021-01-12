@@ -12,7 +12,7 @@ spec:
         claimName: tradr-source
   params:
     - name: destination-image
-      value: image-registry.openshift-image-registry.svc:5000/daytrader/sampledaytrader8
+      value: image-registry.openshift-image-registry.svc:5000/daytrader/tradr
   resources:
     - name: build-image
       resourceRef:

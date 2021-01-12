@@ -14,9 +14,9 @@ spec:
       emptyDir: {}
   params:
     - name: destination-image
-      value: image-registry.openshift-image-registry.svc:5000/daytrader-test/quarkus-stock-quote
+      value: image-registry.openshift-image-registry.svc:5000/daytrader/quarkus-stock-quote
     - name: context-dir
-      value: stock-quote
+      value: quarkus-stock-quote
     - name: manifest-dir
       value: stock-quote
     - name: maven-mirror-url

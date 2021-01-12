@@ -18,7 +18,7 @@ spec:
   type: git
   params:
     - name: url
-      value: https://github.com/kameshsampath/quarkus-stock-trader
+      value: https://github.com/kameshsampath/quarkus-stocktrader
 ---
 apiVersion: tekton.dev/v1alpha1
 kind: PipelineResource

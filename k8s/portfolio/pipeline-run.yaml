@@ -14,7 +14,7 @@ spec:
       emptyDir: {}
   params:
     - name: destination-image
-      value: image-registry.openshift-image-registry.svc:5000/daytrader-test/quarkus-portfolio
+      value: image-registry.openshift-image-registry.svc:5000/daytrader/quarkus-portfolio
     - name: context-dir
       value: quarkus-portfolio
     - name: manifest-dir
