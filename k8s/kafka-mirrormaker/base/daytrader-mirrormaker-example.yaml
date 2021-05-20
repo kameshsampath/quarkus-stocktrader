@@ -5,15 +5,15 @@ metadata:
 spec:
   version: 2.6.0
   replicas: 1
-  connectCluster: "daytrader-kafka-aws"
+  connectCluster: "daytrader-kafka-modern"
   clusters:
-    - alias: "daytrader-kafka-gcp"
+    - alias: "daytrader-kafka-legacy"
       bootstrapServers: "<external bootstrap address>:9094"
-    - alias: "daytrader-kafka-aws"
+    - alias: "daytrader-kafka-modern"
       bootstrapServers: "<external bootstrap address>:9094"
   mirrors:
-    - sourceCluster: "daytrader-kafka-gcp"
-      targetCluster: "daytrader-kafka-aws"
+    - sourceCluster: "daytrader-kafka-legacy"
+      targetCluster: "daytrader-kafka-modern"
       sourceConnector:
         config:
           replication.factor: 1

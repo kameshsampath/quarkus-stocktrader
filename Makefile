@@ -2,7 +2,7 @@ ENV_FILE := .env
 include ${ENV_FILE}
 export $(shell sed 's/=.*//' ${ENV_FILE})
 CURRENT_DIR = $(shell pwd)
-APP_VERSION := $(shell bash -c "xml sel -N ns='http://maven.apache.org/POM/4.0.0' -t -v '//ns:project/ns:version/text()' $(CURRENT_DIR)/pom.xml")
+APP_VERSION := $(shell mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
 
 format:	
 	@mvn editorconfig:format
@@ -52,6 +52,9 @@ tradr_image_build_push:
 	@docker push $(IMAGE_REPO)/tradr:"$(TRADR_VERSION)"
 	@docker tag $(IMAGE_REPO)/tradr:"$(TRADR_VERSION)" $(IMAGE_REPO)/tradr
 	@docker push $(IMAGE_REPO)/tradr
+
+update_tradr_deployment_image:
+	yq eval -i '.spec.template.spec.containers[0].image="$(IMAGE_REPO)/tradr"' k8s/tradr/base/deployment.yaml
 
 .PHONY:	all
 all:	clean install_jars	qsq_jvm_image_build_push	qp_jvm_image_build_push	tos_jvm_image_build_push	tradr_image_build_push

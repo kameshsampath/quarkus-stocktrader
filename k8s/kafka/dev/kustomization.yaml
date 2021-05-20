@@ -6,3 +6,5 @@ generatorOptions:
 
 bases:
   - ../base
+resources:
+  - namespace.yaml
