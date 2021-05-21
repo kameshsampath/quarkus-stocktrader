@@ -5,9 +5,12 @@ The https://github.com/IBMStockTrader[IBMStockTrader] application rebuilt with h
 == Pre-requisites
 
 * https://try.openshift.com[OpenShift4 Cluster]
-* https://www.docker.com/products/docker-desktop[Docker for Mac/Windows/Liux]
+* https://www.docker.com/products/docker-desktop[Docker for Mac/Windows/Linux]
 * https://github.com/mikefarah/yq[yq tool]
 * https://kustomize.io/[kustomize]
+* https://adoptopenjdk.net/[Java 11]
+* https://maven.apache.org[Maven 3.6.3+]
+* https://www.gnu.org/software/gettext/[gettext]
 
 == Prepare Cluster
 

@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: tradr
-        image: quay.io/kameshsampath/quarkus-portfolio
+        image: quay.io/kameshsampath/quarkus-portfolio:1.0.0
         imagePullPolicy: Always
         env:
           - name: PORT

@@ -8,7 +8,7 @@ format:
 	@mvn editorconfig:format
 
 install_jars:
-	@mvn -DskipTests clean install
+	@mvn -DskipTests install
 
 clean:
 	@mvn clean
@@ -17,30 +17,27 @@ clean:
 ### Quarkus Stock Quote
 ##################################################################
 
-qsq_jvm_image_build_push:	
-	@docker build --no-cache -t $(IMAGE_REPO)/quarkus-stock-quote:"$(APP_VERSION)-jar" -f quarkus-stock-quote/src/main/docker/Dockerfile.jvm quarkus-stock-quote
-	@docker push $(IMAGE_REPO)/quarkus-stock-quote:"$(APP_VERSION)-jar"
-	@docker tag $(IMAGE_REPO)/quarkus-stock-quote:"$(APP_VERSION)-jar" $(IMAGE_REPO)/quarkus-stock-quote
+qsq_jvm_image_build_push:		install_jars
+	@mvn -pl quarkus-stock-quote -DskipTests k8s:push
+	@docker tag $(IMAGE_REPO)/quarkus-stock-quote:"$(APP_VERSION)" $(IMAGE_REPO)/quarkus-stock-quote
 	@docker push "$(IMAGE_REPO)"/quarkus-stock-quote
 
 ##################################################################
 ### Quarkus Portfolio
 ##################################################################
 
-qp_jvm_image_build_push:	
-	@docker build --no-cache -t $(IMAGE_REPO)/quarkus-portfolio:"$(APP_VERSION)-jar" -f quarkus-portfolio/src/main/docker/Dockerfile.jvm quarkus-portfolio
-	@docker push $(IMAGE_REPO)/quarkus-portfolio:"$(APP_VERSION)-jar"
-	@docker tag $(IMAGE_REPO)/quarkus-portfolio:"$(APP_VERSION)-jar" $(IMAGE_REPO)/quarkus-portfolio
+qp_jvm_image_build_push:	install_jars
+	@mvn -pl quarkus-portfolio -DskipTests  k8s:push
+	@docker tag $(IMAGE_REPO)/quarkus-portfolio:"$(APP_VERSION)" $(IMAGE_REPO)/quarkus-portfolio
 	@docker push $(IMAGE_REPO)/quarkus-portfolio
 
 ##################################################################
 ### Trade Orders Service
 ##################################################################
 
-tos_jvm_image_build_push:	
-	@docker build --no-cache -t $(IMAGE_REPO)/trade-orders-service:"$(APP_VERSION)-jar" -f trade-orders-service/src/main/docker/Dockerfile.jvm trade-orders-service
-	@docker push $(IMAGE_REPO)/trade-orders-service:"$(APP_VERSION)-jar"
-	@docker tag $(IMAGE_REPO)/trade-orders-service:"$(APP_VERSION)-jar" $(IMAGE_REPO)/trade-orders-service
+tos_jvm_image_build_push:	install_jars
+	@mvn -pl trade-orders-service -DskipTests k8s:push
+	@docker tag $(IMAGE_REPO)/trade-orders-service:"$(APP_VERSION)" $(IMAGE_REPO)/trade-orders-service
 	@docker push $(IMAGE_REPO)/trade-orders-service
 
 ##################################################################
@@ -57,4 +54,4 @@ update_tradr_deployment_image:
 	yq eval -i '.spec.template.spec.containers[0].image="$(IMAGE_REPO)/tradr"' k8s/tradr/base/deployment.yaml
 
 .PHONY:	all
-all:	clean install_jars	qsq_jvm_image_build_push	qp_jvm_image_build_push	tos_jvm_image_build_push	tradr_image_build_push
+all:	clean	qsq_jvm_image_build_push	qp_jvm_image_build_push	tos_jvm_image_build_push	tradr_image_build_push

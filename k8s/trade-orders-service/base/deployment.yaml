@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: tradr
-        image: quay.io/kameshsampath/trade-orders-service
+        image: quay.io/kameshsampath/trade-orders-service:1.0.0
         imagePullPolicy: Always
         env:
           - name: PORT

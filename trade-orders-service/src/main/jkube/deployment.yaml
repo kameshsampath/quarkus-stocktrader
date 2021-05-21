@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: trade-orders-service
+  labels:
+    app.kubernetes.io/part-of: Quarkus-DayTrader
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - imagePullPolicy: Always
+          

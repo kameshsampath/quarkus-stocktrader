@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quarkus-stock-quote
+  labels:
+    app.kubernetes.io/part-of: Quarkus-DayTrader
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - env:
+          #https://iexcloud.io/ API Key
+          - name: IEX_API_KEY
+            valueFrom:
+              secretKeyRef:
+                key: IEX_API_KEY
+                name: quarkus-portfolio
+          imagePullPolicy: Always
+          

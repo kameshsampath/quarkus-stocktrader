@@ -29,4 +29,3 @@ target/
 .vscode/settings.json
 .mvn/
 cluster/project/roles/daytrader_demo/files/
-src/main/jkube/
